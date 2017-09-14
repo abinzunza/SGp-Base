@@ -5,7 +5,6 @@
   
 - Crear el controlador, estoy realizando su función en el router.
 - Convertir la lógica de clases en interfaces.
-- Implementar el subesquema de días, se necesita para hacer la query de modificar turno.
 
 -------------------------------------------------------------------------------------------------------------------
 
