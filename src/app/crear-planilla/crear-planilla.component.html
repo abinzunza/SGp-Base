@@ -1,0 +1,62 @@
+<header>
+	<img src="assets/banner.png">
+</header>
+<div>
+	<button>Inicio</button>
+	<input type="text" required md-maxlength="20">
+	<button>Buscar</button>
+</div>
+<section>
+	<div class="container">
+		<h2>Crear Nueva Planilla de Turnos</h2>
+		<label style="padding: 10%">Semana:	{{fechaInicial | date}} -- {{fechaFinal | date}}</label>
+		<div align="center">
+			<label>Día:</label>
+			<select [(ngModel)]="id_dia">
+				<option *ngFor = "let dias of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']; let i = index " value="{{i}}">{{dias}}</option>
+				<!--Este ngFor crea una opción (<option></option>) por cada día del array creado ([]) con su respectivo día-->
+			</select>
+			<label>Turno:</label>
+			<select [(ngModel)]="id_turno">
+				<option *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" value="{{n}}">{{n+8}}:00</option>
+				<!--Este ngFor crea una opción (<option></option>) por cada horaInicio posible,
+				el array creado ([]) es sólo para controlar la cantidad de iteraciones-->
+			</select>
+			<label>Actividad:</label>
+			<select [(ngModel)]="id_actividad">
+				<option *ngFor = "let actividad of actividades; let i = index " value="{{i}}">{{actividad}}</option>
+				<!--Este ngFor crea una opción (<option></option>) por cada actividad-->
+			</select>
+			<label>Empleado:</label>
+			<select [(ngModel)]="id_empleado">
+				<option *ngFor = "let empleado of empleados; let i = index " value="{{i}}">{{empleados[i].nombre}}</option>
+				<!--Este ngFor crea una opción (<option></option>) por cada empleado en la lista de empleados, con el nombre correspondiente-->
+			</select>
+			<button (click)="agregarTurno()">Agregar Turno</button>
+		</div>
+		<h1>Horarios</h1>
+		<table>
+			<tr><!--Este bloque pinta la cabecera de la tabla (Primera fila)-->   
+				<th>Horas</th>
+				<th *ngFor = "let day of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']">{{day}}</th>
+				<!--Este ngFor pinta los días en la cabecera, 
+				por cada elemento del array creado ([]) pintará un <th></th> con su respectivo día-->
+			</tr>
+			<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]"><!--Este ngFor pintará una fila por cada turno (Son 9 turnos)-->
+				<td> {{n+8}}:00 - {{n+9}}:00</td><!--Esto pinta las horas de la primera columna-->
+				<td *ngFor="let dia of semana.dias; let i=index ">
+					<ng-template [ngIf]="dia.turnos[n].actividad">
+						{{dia.turnos[n].actividad}} -- {{dia.turnos[n].empleado}}
+					</ng-template>
+					<button *ngIf="dia.turnos[n].actividad" (click) = "eliminarTurno(dia.turnos[n])" class="botonRound">x</button>
+				</td>
+				<!--Este ngFor pintará de izquierda a derecha cierto turno para cada día-->
+			</tr>
+			<br>
+		</table>
+		<div align="center">
+			<a routerLink="/mostrarPlanillas"><button (click)="guardarPlanilla()">Guardar planilla</button></a>
+		</div>
+	</div>
+	<br>
+</section>
