@@ -9,6 +9,7 @@ import { MostrarPlanillasComponent } from './mostrar-planillas/mostrar-planillas
 import { CrearPlanillaComponent } from './crear-planilla/crear-planilla.component';
 
 const appRoutes: Routes = [
+	{ path: '', redirectTo: '/mostrarPlanillas', pathMatch: 'full'},
 	{ path: 'crearPlanilla', component: CrearPlanillaComponent},
 	{ path: 'mostrarPlanillas', component: MostrarPlanillasComponent}
 ];
