@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { TurnoService } from '../servicios/turno.service';
 
 @Component({
-  selector: 'app-mostrar-planillas',
-  template: '<a routerLink="/crearPlanilla"><button>Crear planilla</button></a>',
-  styles: []
+    selector: 'app-mostrar-planillas',
+    templateUrl: './mostrar-planillas.component.html',
+	  styleUrls: ['./mostrar-planillas.component.css'],
+    providers: [TurnoService]
 })
+
 export class MostrarPlanillasComponent implements OnInit {
 
-  constructor() { }
+	  planillas;
+  	
+    constructor(private turnoService:TurnoService) { }
 
-  ngOnInit() {
-  }
+  	ngOnInit(){
+  	    this.turnoService.listarPlanillas().subscribe(res => this.planillas = res);
+  	}
+
+  	eliminarPlanilla(fechaAux,i){
+  	    this.planillas.splice(i,1);
+    		let fecha = new Date(fechaAux);
+    		this.turnoService.eliminarPlanilla(fecha);
+  	}
 
 }

@@ -1,6 +1,7 @@
-	<!--<div class="container">-->
+<section>
+	<div class="container">
 		<h2>Crear Nueva Planilla de Turnos</h2>
-		<label id='semana'>Semana:	{{fechaInicial | date}} -- {{fechaFinal | date}}</label>
+		<label id='semana'>Semana:	{{semana?.fecha_inicio | date}} -- {{semana?.fecha_fin | date}}</label>
 		<div align="center">
 			<label>Día:</label>
 			<select [(ngModel)]="id_dia" id='sdia'>
@@ -40,6 +41,8 @@
 			<br>
 		</table>
 		<div align="center">
-			<button (click)="guardarPlanilla()">Guardar planilla</button>
+			<a routerLink="/mostrarPlanillas"><button (click)="modificarPlanilla()">Guardar planilla</button></a>
 		</div>
-	<!--</div>-->
+	</div>
+	<br>
+</section>
