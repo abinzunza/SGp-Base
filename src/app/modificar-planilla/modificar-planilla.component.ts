@@ -1,21 +1,19 @@
 import { Component, OnInit} from '@angular/core';
-import { Semana } from '../entidades/semana';
+import { ActivatedRoute } from '@angular/router'; 
 import { TurnoService } from '../servicios/turno.service';
-import { Router } from '@angular/router';
 import { IPlanillaCanDeactivate } from '../guard/iplanilla-candeactivate';
 
 @Component({
-  selector: 'app-crearPlanilla',
-  templateUrl: './crear-planilla.component.html',
-  styleUrls: ['./crear-planilla.component.css'],
-  providers: [TurnoService]
+    selector: 'app-modificarPlanilla',
+  	templateUrl: './modificar-planilla.component.html',
+  	styleUrls: ['./modificar-planilla.component.css'],
+  	providers: [TurnoService]
 })
 
-export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
+export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 
 	unsavedChanges:boolean = false;
-	fechaInicial:Date = null;
-	fechaFinal:Date = null;
+	fecha_inicio:Date;
 	id_dia:number = -1;
 	id_turno:number = -1;
 	id_cargo:number = -1;
@@ -25,21 +23,15 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 	empleados = {};
 	objectKeys = Object.keys;
 
-	constructor(private turnoService:TurnoService, private router:Router){}
+	constructor(private turnoService:TurnoService, private route: ActivatedRoute){}
 
 	ngOnInit(){
-		this.asignarFecha();
 		this.cargos = ['Auxiliar','Laboratorio','Matrona','Medico','Paramedico','Secretaria'];
+		this.route.params.subscribe(params => this.fecha_inicio = new Date(params['id']));
 		this.turnoService.obtenerEmpleados()
 			.subscribe(resEmpleados => resEmpleados.forEach(elemento => this.empleados[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo}));
-		this.semana = new Semana(this.fechaInicial,this.fechaFinal);
-	}
-
-	asignarFecha(){
-		this.turnoService.obtenerFecha().subscribe(res => {
-			this.fechaInicial = new Date(res.fecha_inicio);
-			this.fechaFinal = new Date(res.fecha_fin);
-		});
+		this.turnoService.obtenerPlanilla(this.fecha_inicio)
+			.subscribe(resPlanilla => this.semana = resPlanilla);
 	}
 
 	agregarTurno(){
@@ -67,13 +59,13 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 		this.id_empleado = -1;
 	}
 
-	guardarPlanilla(){
+	modificarPlanilla(){
 		this.unsavedChanges = false;
-		this.turnoService.guardarPlanilla({
-			fecha_inicio:this.fechaInicial,
-			fecha_fin:this.fechaFinal,
+		this.turnoService.modificarPlanilla({
+			fecha_inicio:this.semana.fecha_inicio,
+			fecha_fin:this.semana.fecha_fin,
 			dias:this.semana.dias
-		}).subscribe(null,null,()=>this.router.navigate(['/mostrarPlanillas']));
+		});
 	}
 
 	puedeDesactivar(){

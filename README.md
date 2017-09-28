@@ -1,11 +1,4 @@
 # Mean-Stack
-
-	
-  Próximas tareas
-  
-- Crear el controlador, estoy realizando su función en el router.
-- Convertir la lógica de clases en interfaces.
-
 -------------------------------------------------------------------------------------------------------------------
 
 	Instalar
