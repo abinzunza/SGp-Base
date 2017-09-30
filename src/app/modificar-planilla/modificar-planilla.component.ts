@@ -26,7 +26,7 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 	constructor(private turnoService:TurnoService, private route: ActivatedRoute){}
 
 	ngOnInit(){
-		this.cargos = ['Auxiliar','Laboratorio','Matrona','Medico','Paramedico','Secretaria'];
+		this.cargos = ['Auxiliar','Laboratorio','Matrona','Paramedico','Secretaria'];
 		this.route.params.subscribe(params => this.fecha_inicio = new Date(params['id']));
 		this.turnoService.obtenerEmpleados()
 			.subscribe(resEmpleados => resEmpleados.forEach(elemento => this.empleados[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo}));
