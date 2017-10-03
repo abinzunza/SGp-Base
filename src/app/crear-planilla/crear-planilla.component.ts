@@ -29,7 +29,7 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 
 	ngOnInit(){
 		this.asignarFecha();
-		this.cargos = ['Auxiliar','Laboratorio','Matrona','Medico','Paramedico','Secretaria'];
+		this.cargos = ['Auxiliar','Laboratorio','Matrona','Paramedico','Secretaria'];
 		this.turnoService.obtenerEmpleados()
 			.subscribe(resEmpleados => resEmpleados.forEach(elemento => this.empleados[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo}));
 		this.semana = new Semana(this.fechaInicial,this.fechaFinal);
