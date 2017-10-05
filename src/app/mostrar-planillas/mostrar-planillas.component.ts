@@ -27,8 +27,7 @@ export class MostrarPlanillasComponent implements OnInit {
           this.turnoService.eliminarPlanilla(fecha);
         } else {
             alert('No se ha eliminado la planilla');    
-        }
-        
+        }   
     }
 
 }

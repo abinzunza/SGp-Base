@@ -30,13 +30,17 @@
 				<th *ngFor = "let day of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']">{{day}}</th>
 			</tr>
 			<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]">
-				<td> {{n+8}}:00 - {{n+9}}:00</td>
-				<td *ngFor="let dia of semana?.dias">
-					<ng-template [ngIf]="dia.turnos[n].empleado">
-						{{empleados[dia.turnos[n].empleado].nombre}} - {{empleados[dia.turnos[n].empleado].cargo}}
-						<button (click) = "eliminarTurno(dia.turnos[n])" class="botonRound">x</button>
+			<td> {{n+8}}:00 - {{n+9}}:00</td>
+			<td *ngFor="let dia of semana?.dias">
+				<table id="nestedTable">
+					<ng-template ngFor let-key [ngForOf]="dia.turnos[n].empleado"; let-i = index>
+					    <tr id="nestedTr">
+					    	<td style="width: 80% ;border: none">{{empleados[key].nombre}}<br>{{empleados[key].cargo}}</td>
+					    	<td style="width: 20% ;border: none"><button (click) = "eliminarTurno(dia.turnos[n],i)" class="botonRound">x</button></td>
+					    </tr>
 					</ng-template>
-				</td>
+				</table>
+			</td>
 			</tr>
 			<br>
 		</table>
