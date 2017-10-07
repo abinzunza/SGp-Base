@@ -10,6 +10,16 @@
 #semana {
 	padding-left: 10%;
 }
+#nestedTable{
+	margin-left: 0px; 
+	width: 100%;
+}
+#nestedTr{
+	background-color: transparent;
+}
+#nestedTr:nth-last-child(n+2) {
+	box-shadow: 0px 1px 0 black;
+}
 select {
 	margin-right: 3%;
 	min-width: 50px

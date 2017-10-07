@@ -1,45 +1,47 @@
-	<!--<div class="container">-->
-		<h2>Crear Nueva Planilla de Turnos</h2>
-		<label id='semana'>Semana:	{{fechaInicial | date}} -- {{fechaFinal | date}}</label>
-		<div align="center">
-			<label>Día:</label>
-			<select [(ngModel)]="id_dia" id='sdia'>
-				<option *ngFor = "let dias of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']; let i = index " value="{{i}}">{{dias}}</option>
-			</select>
-			<label>Turno:</label>
-			<select [(ngModel)]="id_turno" id='sturno'>
-				<option *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" value="{{n}}">{{n+8}}:00</option>
-			</select>
-			<label>Actividad:</label>
-			<select [(ngModel)]="id_cargo" id='scargo'>
-				<option *ngFor = "let cargo of cargos; let i = index " value="{{i}}">{{cargo}}</option>
-			</select>
-			<label>Empleado:</label>
-			<select [(ngModel)]="id_empleado" id='sempleado'>
-				<ng-template ngFor let-key [ngForOf]="objectKeys(empleados)"; let-i = index>
-				    <option *ngIf="empleados[key].cargo == cargos[id_cargo]" value={{i}}>{{empleados[key].nombre}}</option>
-				</ng-template> 
-			</select>
-			<button (click)="agregarTurno()">Agregar Turno</button>
-		</div>
-		<h1>Horarios</h1>
-		<table>
-			<tr>  
-				<th>Horas</th>
-				<th *ngFor = "let day of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']">{{day}}</th>
-			</tr>
-			<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]">
-				<td> {{n+8}}:00 - {{n+9}}:00</td>
-				<td *ngFor="let dia of semana?.dias">
-					<ng-template [ngIf]="dia.turnos[n].empleado">
-						{{empleados[dia.turnos[n].empleado].nombre}} - {{empleados[dia.turnos[n].empleado].cargo}}
-						<button (click) = "eliminarTurno(dia.turnos[n])" class="botonRound">x</button>
-					</ng-template>
-				</td>
-			</tr>
-			<br>
-		</table>
-		<div align="center">
-			<button (click)="guardarPlanilla()">Guardar planilla</button>
-		</div>
-	<!--</div>-->
+<h2>Crear Nueva Planilla de Turnos</h2>
+<label id='semana'>Semana:	{{fechaInicial | date}} -- {{fechaFinal | date}}</label>
+<div align="center">
+	<label>Día:</label>
+	<select [(ngModel)]="id_dia" id='sdia'>
+		<option *ngFor = "let dias of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']; let i = index " value="{{i}}">{{dias}}</option>
+	</select>
+	<label>Turno:</label>
+	<select [(ngModel)]="id_turno" id='sturno'>
+		<option *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" value="{{n}}">{{n+8}}:00</option>
+	</select>
+	<label>Actividad:</label>
+	<select [(ngModel)]="id_cargo" id='scargo'>
+		<option *ngFor = "let cargo of cargos; let i = index " value="{{i}}">{{cargo}}</option>
+	</select>
+	<label>Empleado:</label>
+	<select [(ngModel)]="id_empleado" id='sempleado'>
+		<ng-template ngFor let-key [ngForOf]="objectKeys(empleados)"; let-i = index>
+		    <option *ngIf="empleados[key].cargo == cargos[id_cargo]" value={{i}}>{{empleados[key].nombre}}</option>
+		</ng-template> 
+	</select>
+	<button (click)="agregarTurno()">Agregar Turno</button>
+</div>
+<h1>Horarios</h1>
+<table>
+	<tr>  
+		<th>Horas</th>
+		<th *ngFor = "let day of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']">{{day}}</th>
+	</tr>
+	<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]">
+		<td> {{n+8}}:00 - {{n+9}}:00</td>
+		<td *ngFor="let dia of semana?.dias">
+			<table id="nestedTable">
+				<ng-template ngFor let-key [ngForOf]="dia.turnos[n].empleado"; let-i = index>
+				    <tr id="nestedTr">
+				    	<td style="width: 80% ;border: none">{{empleados[key].nombre}}<br>{{empleados[key].cargo}}</td>
+				    	<td style="width: 20% ;border: none"><button (click) = "eliminarTurno(dia.turnos[n],i)" class="botonRound">x</button></td>
+				    </tr>
+				</ng-template>
+			</table>
+		</td>
+	</tr>
+	<br>
+</table>
+<div align="center">
+	<button (click)="guardarPlanilla()">Guardar planilla</button>
+</div>
