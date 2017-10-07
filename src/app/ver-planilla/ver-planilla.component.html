@@ -1,8 +1,9 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <section>
 	<div class="container">
 		<label id='semana'>Semana:	{{semana?.fecha_inicio | date}} -- {{semana?.fecha_fin | date}}</label>
 		<h1>Horarios</h1>
-		<table>
+		<table class="table table-bordered">
 			<tr>  
 				<th>Horas</th>
 				<th *ngFor = "let day of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']">{{day}}</th>
@@ -18,7 +19,7 @@
 			<br>
 		</table>
 		<div align="center">
-			<a routerLink="/mostrarPlanillas"><button>Atrás</button></a>
+			<a routerLink="/mostrarPlanillas"><button class="btn btn-primary">Atrás</button></a>
 		</div>
 	</div>
 	<br>

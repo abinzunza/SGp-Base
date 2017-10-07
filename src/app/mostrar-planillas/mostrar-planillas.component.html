@@ -1,7 +1,8 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <h1>Registro de planillas</h1>
 <section>
 	<div class="container">
-		<table align="center">
+		<table class="table table-bordered table-responsive">
 			<tr>
 				<th>Fecha</th>
 				<th>Opciones</th>
@@ -9,14 +10,14 @@
 			<tr *ngFor="let planilla of planillas; let i = index ">
 				<th>{{planilla.fecha_inicio | date}}</th>
 				<th>
-					<a routerLink="/modificarPlanilla/{{planilla.fecha_inicio}}"><button>Modificar Planilla</button></a>
-					<button (click)="eliminarPlanilla(planilla.fecha_inicio,i)">Eliminar</button>
-					<a routerLink="/verPlanilla/{{planilla.fecha_inicio}}"><button>Ver Planilla</button></a>
+					<a routerLink="/modificarPlanilla/{{planilla.fecha_inicio}}"><button  class="btn btn-primary">Modificar Planilla</button></a>
+					<button  class="btn btn-primary" (click)="eliminarPlanilla(planilla.fecha_inicio,i)">Eliminar</button>
+					<a routerLink="/verPlanilla/{{planilla.fecha_inicio}}"><button  class="btn btn-primary">Ver Planilla</button></a>
 				</th>
 			</tr>
 		</table>
 	</div>
 </section>
 <div align="center">
-	<a routerLink="/crearPlanilla"><button>Crear planilla</button></a>
+	<a routerLink="/crearPlanilla"><button class="btn btn-success">Crear planilla</button></a>
 </div>	

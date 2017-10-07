@@ -5,15 +5,18 @@
 	<title>MeanStack</title>
 	<base href="/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
   	<header>
 		<img id='banner' src="assets/banner.png">
 	</header>
-	<div>
-		<a routerLink="http://localhost:4200/mostrarPlanillas"><button>Inicio</button></a>
-		<input type="text" required md-maxlength="20">
-		<button>Buscar</button>
+	<div class="input-group col-md-4">
+		<a routerLink="http://localhost:4200/mostrarPlanillas"><span class="input-group-btn"><button class="btn btn-default mr-1">Inicio</button></span></a>
+		
+		<input class="form-control" type="text" required md-maxlength="20">
+		
+		<span class="input-group-btn"><button class="btn btn-secondary">Buscar</button></span>
 	</div>
  	<app-root></app-root>
 </body>

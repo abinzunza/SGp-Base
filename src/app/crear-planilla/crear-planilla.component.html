@@ -1,29 +1,31 @@
 	<!--<div class="container">-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
 		<h2>Crear Nueva Planilla de Turnos</h2>
 		<label id='semana'>Semana:	{{fechaInicial | date}} -- {{fechaFinal | date}}</label>
-		<div align="center">
-			<label>Día:</label>
-			<select [(ngModel)]="id_dia" id='sdia'>
+		<div class="form-row">
+			<label class="col-form-label" style="margin-left: 10%">Día:</label>
+			<select class="custom-select" style="width:9%" [(ngModel)]="id_dia" id='sdia'>
 				<option *ngFor = "let dias of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']; let i = index " value="{{i}}">{{dias}}</option>
 			</select>
-			<label>Turno:</label>
-			<select [(ngModel)]="id_turno" id='sturno'>
+			<label class="col-form-label">Turno:</label>
+			<select class="custom-select" [(ngModel)]="id_turno" id='sturno'>
 				<option *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" value="{{n}}">{{n+8}}:00</option>
 			</select>
-			<label>Actividad:</label>
-			<select [(ngModel)]="id_cargo" id='scargo'>
+			<label class="col-form-label">Actividad:</label>
+			<select class="custom-select" style="width:9.5%" [(ngModel)]="id_cargo" id='scargo'>
 				<option *ngFor = "let cargo of cargos; let i = index " value="{{i}}">{{cargo}}</option>
 			</select>
-			<label>Empleado:</label>
-			<select [(ngModel)]="id_empleado" id='sempleado'>
+			<label class="col-form-label">Empleado:</label>
+			<select class="custom-select" style="width:9.5%" [(ngModel)]="id_empleado" id='sempleado'>
 				<ng-template ngFor let-key [ngForOf]="objectKeys(empleados)"; let-i = index>
 				    <option *ngIf="empleados[key].cargo == cargos[id_cargo]" value={{i}}>{{empleados[key].nombre}}</option>
 				</ng-template> 
 			</select>
-			<button (click)="agregarTurno()">Agregar Turno</button>
+			<button class="btn btn-success" (click)="agregarTurno()">Agregar Turno</button>
 		</div>
 		<h1>Horarios</h1>
-		<table>
+		<table class="table table-bordered table-responsive">
 			<tr>  
 				<th>Horas</th>
 				<th *ngFor = "let day of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']">{{day}}</th>
@@ -40,6 +42,9 @@
 			<br>
 		</table>
 		<div align="center">
-			<button (click)="guardarPlanilla()">Guardar planilla</button>
+			<button class="btn btn-success" (click)="guardarPlanilla()">Guardar planilla</button>
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script type="text/javascript" src="iconwc.js"></script>
 	<!--</div>-->
