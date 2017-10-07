@@ -19,9 +19,15 @@ export class MostrarPlanillasComponent implements OnInit {
   	}
 
   	eliminarPlanilla(fechaAux,i){
-  	    this.planillas.splice(i,1);
-    		let fecha = new Date(fechaAux);
-    		this.turnoService.eliminarPlanilla(fecha);
-  	}
+        var respuesta = confirm("¿Desea Eliminar esta planilla?");
+        if (respuesta) {
+          alert('La planilla se ha eliminado');
+          this.planillas.splice(i,1);
+          let fecha = new Date(fechaAux);
+          this.turnoService.eliminarPlanilla(fecha);
+        } else {
+            alert('No se ha eliminado la planilla');    
+        }   
+    }
 
 }

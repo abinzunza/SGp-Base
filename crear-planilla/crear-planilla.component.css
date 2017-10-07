@@ -32,7 +32,7 @@ table {
 	margin-left:120px;
 }
 td, th {
-	border-color: black;
+	border: 2px solid #117864;
 	text-align: center;
 	padding: 1px;
 }

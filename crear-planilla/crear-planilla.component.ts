@@ -29,7 +29,7 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 
 	ngOnInit(){
 		this.asignarFecha();
-		this.cargos = ['TENS','Administrativo','Lab Biología','Matron(a)','Lab Andrología'];
+		this.cargos = ['Auxiliar','Laboratorio','Matrona','Paramedico','Secretaria'];
 		this.turnoService.obtenerEmpleados()
 			.subscribe(resEmpleados => resEmpleados.forEach(elemento => this.empleados[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo,horas:0}));
 		this.semana = new Semana(this.fechaInicial,this.fechaFinal);
@@ -45,7 +45,7 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 	agregarTurno(){
 		if(this.comprobarSeleccion()){
 			if(this.semana.dias[this.id_dia].turnos[this.id_turno].empleado.indexOf(this.objectKeys(this.empleados)[this.id_empleado])===-1){
-				if(this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas<2 || confirm("Éste empleado cumplió las 2 horas. ¿Estás seguro de añadirle un nuevo turno?")){
+				if(this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas<44 || confirm("Éste empleado cumplió las 44 horas. ¿Estás seguro de añadirle un nuevo turno?")){
 					this.unsavedChanges = true;
 					this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas++;
 					this.semana.dias[this.id_dia].turnos[this.id_turno].empleado.push(this.objectKeys(this.empleados)[this.id_empleado]);
