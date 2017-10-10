@@ -1,30 +1,43 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-<section>
-	<div class="container">
-		<label id='semana'>Semana:	{{semana?.fecha_inicio | date}} -- {{semana?.fecha_fin | date}}</label>
-		<h1>Horarios</h1>
-		<table class="table table-bordered">
-			<tr>  
-				<th>Horas</th>
-				<th *ngFor = "let day of ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']">{{day}}</th>
-			</tr>
-			<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]">
+<div class="container my-3">
+	<h2>Ver Planilla de Turnos</h2>
+	<label class="ml-5">Semana:	{{planilla?.fecha_inicio | date}} -- {{planilla?.fecha_fin | date}}</label>
+	<h1 id="tituloTablaHorario">Horarios</h1>
+	<table class="table table-bordered table-responsive" id="tablaHorario">
+		<tr>  
+			<th>Horas</th>
+			<th *ngFor = "let day of diasSemana">{{day}}</th>
+		</tr>
+		<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" id="trTablaHorario">
 			<td> {{n+8}}:00 - {{n+9}}:00</td>
-			<td *ngFor="let dia of semana?.dias">
-				<table id="nestedTable">
-					<ng-template ngFor let-key [ngForOf]="dia.turnos[n].empleado"; let-i = index>
-					    <tr id="nestedTr">
-					    	<td style="width: 80% ;border: none">{{empleados[key].nombre}}<br>{{empleados[key].cargo}}</td>
-					    
-					    </tr>
-					</ng-template>
-				</table>
+			<td (click)="detalleTurno(i,n,modal)" id="tdTablaHorario" *ngFor="let dia of planilla?.dias; let i = index ">
+				<i *ngIf="dia?.turnos[n].empleados.length" [ngClass]="(dia?.turnos[n].empleados.length>1)?'fa fa-users':'fa fa-user'"></i>
 			</td>
-			<br>
-		</table>
-		<div align="center">
-			<a routerLink="/mostrarPlanillas"><button class="btn btn-primary">Atrás</button></a>
-		</div>
-	</div>
+		</tr>
+		<br>
+	</table>
 	<br>
-</section>
+	<div align="center">
+		<a routerLink="/mostrarPlanillas"><button class="btn btn-primary">Atrás</button></a>
+	</div>
+</div>
+<ng-template #modal let-c="close">
+	<div class="modal-header">
+		<h5 class="modal-title">{{diasSemana[diaSeleccionado]}} {{planilla.dias[diaSeleccionado].fecha | date}}</h5>
+		<button class="close" (click)="c()">
+        	<span>×</span>
+        </button>
+	</div>
+	<div class="modal-body">
+		<table class="table table-bordered table-responsive" id="tablaModal">
+			<th>Funcionario</th>
+			<th>Actividad</th>
+			<tr *ngFor="let key of planilla.dias[diaSeleccionado].turnos[turnoSeleccionado].empleados">
+				<td>{{empleados[key].nombre}}</td>
+				<td>{{empleados[key].cargo}}</td>
+			</tr>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<label>{{turnoSeleccionado+8}}:00 - {{turnoSeleccionado+9}}:00</label>
+	</div>
+</ng-template>

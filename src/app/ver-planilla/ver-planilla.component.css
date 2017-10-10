@@ -1,51 +1,30 @@
-#sdia {
-	width: 7%
-}
-#scargo {
-	width: 8%
-}
-#sempleado {
-	width: 7%
-}
-#semana {
-	padding-left: 10%
-}
-select {
-	margin-right: 3%;
-	min-width: 50px
-}
-table {
-	font-family: times, sans-serif;
-	border-collapse: separate;
-	table-layout: fixed;
-	width: auto;
-
-}
-td, th {
-	border: 2px solid #117864;
+#tituloTablaHorario { 
 	text-align: center;
-	
+}#tablaHorario {
+	font-family: sans-serif;
+	width: 80%;
+	margin: auto;
+	table-layout: fixed;
+	border-collapse: separate;
 }
-tr:nth-child(even) {
+#trTablaHorario:nth-child(even) {
 	background-color: #D5F5E3;
+}
+#tdTablaHorario:hover {
+	border-color: #17a2b8;
+}
+#tablaModal th {
+	background-color: #00ad84;
+	color: #d5f5dd;
 }
 label {
 	font-weight: bold;
 }
-h1 {
+td, th {
 	text-align: center;
+	vertical-align: middle;
+	padding: 1px;
 }
-h2 {
-	padding-left: 120px;
-}
-div {
-	padding-top: 10px;
-}
-.container {
-	padding-top: 25px;
-}
-.botonRound {
-	float: right;
-	border-radius: 10px; 
-	font-size: 10px;
+i {
+	color:grey;
 }

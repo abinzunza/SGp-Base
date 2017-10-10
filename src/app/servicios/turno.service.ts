@@ -34,7 +34,7 @@ export class TurnoService {
 	}
 
 	modificarPlanilla(planilla){
-		this.http.put('http://localhost:2100/modificarPlanilla',planilla,this.headers).subscribe();
+		return this.http.put('http://localhost:2100/modificarPlanilla',planilla,this.headers);
 	}
 
 	eliminarPlanilla(fecha:Date){

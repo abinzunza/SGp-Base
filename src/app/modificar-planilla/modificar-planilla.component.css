@@ -1,51 +1,44 @@
-#sdia {
-	width: 7%
+#tituloTablaHorario { 
+	text-align: center;
+}#tablaHorario {
+	font-family: sans-serif;
+	width: 80%;
+	margin: auto;
+	table-layout: fixed;
+	border-collapse: separate;
 }
-#scargo {
-	width: 8%
+#trTablaHorario:nth-child(even) {
+	background-color: #D5F5E3;
 }
-#sempleado {
-	width: 7%
+#tdTablaHorario:hover {
+	border-color: #17a2b8;
 }
-#semana {
-	padding: 10%
+#tablaModal th {
+	background-color: #00ad84;
+	color: #d5f5dd;
+}
+#btnRedondo {
+	color: #d5f5e3;
+    background-color: #00ad84;
+	border-radius: 10px;
+	border: none;
+	font-size: 10px;
+}
+#btnRedondo i {
+	color:#d5f5dd;
 }
 select {
 	margin-right: 3%;
-	min-width: 50px
-}
-table {
-	font-family: times, sans-serif;
-	border-collapse: separate;
-	table-layout: fixed;
-	width: 80%;
-	margin-left:120px;
-}
-td, th {
-	border: 2px solid #117864;
-	text-align: center;
-	padding: 1px;
-}
-tr:nth-child(even) {
-	background-color: #D5F5E3;
+	min-width: 8%;
 }
 label {
 	font-weight: bold;
 }
-h1 {
+td, th {
 	text-align: center;
+	vertical-align: middle;
+	padding: 1px;
 }
-h2 {
-	padding-left: 120px;
-}
-div {
-	padding-top: 10px;
-}
-.container {
-	padding-top: 25px;
-}
-.botonRound {
-	float: right;
-	border-radius: 10px; 
-	font-size: 10px;
+i {
+	color:grey;
 }
