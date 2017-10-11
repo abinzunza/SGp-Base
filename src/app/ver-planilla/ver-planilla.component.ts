@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 import { TurnoService } from '../servicios/turno.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-verPlanilla',
@@ -12,17 +13,26 @@ import { TurnoService } from '../servicios/turno.service';
 export class VerPlanillaComponent implements OnInit {
 
 	empleados = {};
-	semana = null;
-	fecha_inicio:Date;
+	planilla = null;
+	diaSeleccionado = -1;
+	turnoSeleccionado = -1;
+	diasSemana = [];
 
-	constructor(private turnoService:TurnoService, private route: ActivatedRoute){}
+	constructor(private turnoService:TurnoService, private route: ActivatedRoute, private modalService:NgbModal){}
 	
 	ngOnInit(){
-		this.route.params.subscribe(params => this.fecha_inicio = new Date(params['id']));
+		this.diasSemana = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
 		this.turnoService.obtenerEmpleados()
 			.subscribe(resEmpleados => resEmpleados.forEach(elemento => this.empleados[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo}));
-		this.turnoService.obtenerPlanilla(this.fecha_inicio)
-			.subscribe(resPlanilla => this.semana = resPlanilla);
+		this.route.params.subscribe(params => this.turnoService.obtenerPlanilla(new Date(params['id'])).subscribe(resPlanilla => this.planilla = resPlanilla));
+	}
+
+	detalleTurno(dia,turno,modal){
+		if(this.planilla.dias[dia].turnos[turno].empleados.length!==0){
+			this.diaSeleccionado = dia;
+			this.turnoSeleccionado = turno;
+			this.modalService.open(modal);
+		}
 	}
 
 }

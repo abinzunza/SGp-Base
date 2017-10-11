@@ -1,11 +1,7 @@
 var Planilla = require("../models/semana");
 
 exports.crearPlanilla = ((req,res)=>{
-    Planilla.create({
-        fecha_inicio: req.body.fecha_inicio,
-        fecha_fin: req.body.fecha_fin,
-        dias: req.body.dias
-    },
+    Planilla.create(req.body,
     (err,docs)=>{
         if(!err){
             res.status(200).send("Listo")
