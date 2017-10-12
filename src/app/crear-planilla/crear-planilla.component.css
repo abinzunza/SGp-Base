@@ -29,11 +29,9 @@
 	font-size: calc(5px + 0.8vw);
 }
 select {
-	/*min-width: 130px;*/
 	height: auto;
 	width: 90%;
 	max-width: 150px;
-
 }
 label {
 	font-weight: bold;
