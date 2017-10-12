@@ -2,44 +2,69 @@
 	<h2>Modificar Planilla de Turnos</h2>
 	<label class="ml-5">Semana:	{{planilla?.fecha_inicio | date}} -- {{planilla?.fecha_fin | date}}</label>
 	<div align="center">
-		<label>Día:</label>
-		<select class="custom-select" [(ngModel)]="id_dia">
-			<option *ngFor = "let dias of diasSemana; let i = index " value="{{i}}">{{dias}}</option>
-		</select>
-		<label>Inicio Turno:</label>
-		<select class="custom-select" [(ngModel)]="id_turno_inicio">
-			<option *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" value="{{n}}">{{n+8}}:00</option>
-		</select>
-		<label>Fin Turno:</label>
-		<select class="custom-select" [(ngModel)]="id_turno_fin">
-			<option *ngFor = "let m of fines(id_turno_inicio)" value="{{m}}">{{m+8}}:00</option>
-		</select>
-		<label>Actividad:</label>
-		<select class="custom-select" [(ngModel)]="id_cargo">
-			<option *ngFor = "let cargo of cargos; let i = index " value="{{i}}">{{cargo}}</option>
-		</select>
-		<label>Funcionario:</label>
-		<select class="custom-select" [(ngModel)]="id_empleado">
-			<ng-template ngFor let-key [ngForOf]="objectKeys(empleados)"; let-i = index>
-			    <option *ngIf="empleados[key].cargo == cargos[id_cargo]" value={{i}}>{{empleados[key].nombre}}</option>
-			</ng-template> 
-		</select>
-		<button class="btn btn-success" (click)="agregarTurno()">Agregar Turno</button>
+		<div class="row my-2">
+			<div class="col-4 mx-auto">
+				<label>Día:</label>
+				<select class="custom-select" [(ngModel)]="id_dia">
+					<option *ngFor = "let dias of diasSemana; let i = index " value="{{i}}">{{dias}}</option>
+				</select>
+			</div>
+			<div class="col-4 mx-auto">
+				<label>Inicio Turno:</label>
+				<select class="custom-select" [(ngModel)]="id_turno_inicio">
+					<option *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" value="{{n}}">{{n+8}}:00</option>
+				</select>
+			</div>
+			<div class="col-4 mx-auto">
+				<label>Fin Turno:</label>
+				<select class="custom-select" [(ngModel)]="id_turno_fin">
+					<option *ngFor = "let m of fines(id_turno_inicio)" value="{{m}}">{{m+8}}:00</option>
+				</select>
+			</div>
+		</div>
+		<div class="row my-2">
+			<div class="col-4 mx-auto">
+				<label>Actividad:</label>
+				<select class="custom-select" [(ngModel)]="id_cargo">
+					<option *ngFor = "let cargo of cargos; let i = index " value="{{i}}">{{cargo}}</option>
+				</select>
+			</div>
+			<div class="col-4 mx-auto">
+				<label>Funcionario:</label>
+				<select class="custom-select" [(ngModel)]="id_empleado">
+					<ng-template ngFor let-key [ngForOf]="objectKeys(empleados)"; let-i = index>
+					    <option *ngIf="empleados[key].cargo == cargos[id_cargo]" value={{i}}>{{empleados[key].nombre}}</option>
+					</ng-template> 
+				</select>
+			</div>
+		</div>
+		<div class="row my-2">
+			<div class="col">
+				<button class="btn btn-success" (click)="agregarTurno()">Agregar Turno</button>
+			</div>
+		</div>
 	</div>
-	<h1 id="tituloTablaHorario">Horarios</h1>
-	<table class="table table-bordered table-responsive" id="tablaHorario">
-		<tr>  
-			<th>Horas</th>
-			<th *ngFor = "let day of diasSemana">{{day}}</th>
-		</tr>
-		<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" id="trTablaHorario">
-			<td> {{n+8}}:00 - {{n+9}}:00</td>
-			<td (click)="detalleTurno(i,n,modal)" id="tdTablaHorario" *ngFor="let dia of planilla?.dias; let i = index ">
-				<i *ngIf="hayTurnos(n,i)>0" [ngClass]="hayTurnos(n,i)>1?'fa fa-users':'fa fa-user'"></i>
-			</td>
-		</tr>
-		<br>
-	</table>
+	<h2 id="tituloTablaHorario">Horarios</h2>
+	<div class="row">
+		<div class="col-10 mx-auto">
+			<table class="table table-bordered" id="tablaHorario">
+			  	<thead>
+			    	<tr>  
+			      		<th>Horas</th>
+			      		<th *ngFor = "let day of diasSemana">{{day}}</th>
+			    	</tr>
+			  	</thead>
+			  	<tbody>
+			    	<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" id="trTablaHorario">
+			      		<td> {{n+8}}:00 - {{n+9}}:00</td>
+			      		<td (click)="detalleTurno(i,n,modal)" id="tdTablaHorario" *ngFor="let dia of planilla?.dias; let i = index ">
+			        		<i *ngIf="hayTurnos(n,i)>0" [ngClass]="hayTurnos(n,i)>1?'fa fa-users':'fa fa-user'"></i>
+			      		</td>
+			    	</tr>
+			  	</tbody>
+			</table>
+		</div>
+	</div>
 	<br>
 	<div align="center">
 		<button class="btn btn-success" (click)="modificarPlanilla()">Guardar planilla</button>
@@ -53,23 +78,29 @@
         </button>
 	</div>
 	<div class="modal-body">
-		<table class="table table-bordered table-responsive" id="tablaModal">
-			<th>Funcionario</th>
-			<th>Actividad</th>
-			<th>Inicio</th>
-			<th>Fin</th>
-			<th>Eliminar</th>
-			<tr *ngFor="let key of turnosModal; let i=index ">
-				<td>{{key.nombre}}</td>
-				<td>{{key.cargo}}</td>
-				<td>{{key.inicio}}</td>
-		    	<td>{{key.fin}}</td>
-		    	<td>
-		    		<button id="btnRedondo" (click) = "eliminarTurno(diaSeleccionado,key.idx,i)">
-		    			<i class="fa fa-times"></i>
-		    		</button>
-		    	</td>
-			</tr>
+		<table class="table table-bordered" id="tablaModal">
+			<thead>
+				<tr>
+					<th>Funcionario</th>
+					<th>Actividad</th>
+					<th>Inicio</th>
+					<th>Fin</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let key of turnosModal; let i=index ">
+					<td>{{key.nombre}}</td>
+					<td>{{key.cargo}}</td>
+					<td>{{key.inicio}}</td>
+			    	<td>{{key.fin}}</td>
+			    	<td>
+			    		<button id="btnRedondo" (click) = "eliminarTurno(diaSeleccionado,key.idx,i)">
+			    			<i class="fa fa-times"></i>
+			    		</button>
+			    	</td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 	<div class="modal-footer">
