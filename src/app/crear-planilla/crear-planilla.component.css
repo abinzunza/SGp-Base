@@ -2,10 +2,9 @@
 	text-align: center;
 }#tablaHorario {
 	font-family: sans-serif;
-	width: 80%;
-	margin: auto;
 	table-layout: fixed;
 	border-collapse: separate;
+	font-size: calc(1px + 0.8vw);
 }
 #trTablaHorario:nth-child(even) {
 	background-color: #D5F5E3;
@@ -26,12 +25,19 @@
 #btnRedondo i {
 	color:#d5f5dd;
 }
+#tablaModal, button {
+	font-size: calc(5px + 0.8vw);
+}
 select {
-	margin-right: 3%;
-	min-width: 8%;
+	/*min-width: 130px;*/
+	height: auto;
+	width: 90%;
+	max-width: 150px;
+
 }
 label {
 	font-weight: bold;
+	font-size: calc(5px + 0.8vw);
 }
 td, th {
 	text-align: center;
@@ -40,4 +46,7 @@ td, th {
 }
 i {
 	color:grey;
+}
+h2 {
+	font-size: calc(1rem + 1vw);
 }
