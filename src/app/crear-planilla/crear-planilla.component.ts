@@ -17,7 +17,8 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 
 	public unsavedChanges:boolean = false;
 	id_dia:number = -1;
-	id_turno:number = -1;
+	id_turno_inicio:number = -1;
+	id_turno_fin:number = -1;
 	id_cargo:number = -1;
 	id_empleado:number = -1;
 	diaSeleccionado = -1;
@@ -27,6 +28,7 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 	cargos = [];
 	diasSemana = [];
 	planilla = null;
+	turnosModal:any[] = [];
 
 	constructor(private turnoService:TurnoService, private router:Router, private modalService:NgbModal){}
 
@@ -36,6 +38,16 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 		this.diasSemana = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
 		this.turnoService.obtenerEmpleados()
 			.subscribe(resEmpleados => resEmpleados.forEach(elemento => this.empleados[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo,horas:0}));
+	}
+
+	fines(inicio:number):number[] {
+		if(inicio===-1)
+			return [];
+		let a = [];
+		for(let i = inicio; i < 9; i++) {
+			a.push(Number(i)+1);
+		}
+		return a;
 	}
 
 	crearPlanilla(){
@@ -50,11 +62,12 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 
 	agregarTurno(){
 		if(this.comprobarSeleccion()){
-			if(this.planilla.dias[this.id_dia].turnos[this.id_turno].empleados.indexOf(this.objectKeys(this.empleados)[this.id_empleado])===-1){
-				if(this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas<1){
+			if(this.comprobarTurno(this.id_dia,this.id_turno_inicio,this.id_turno_fin,this.objectKeys(this.empleados)[this.id_empleado])){
+				if(this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas<45){
 					this.unsavedChanges = true;
-					this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas++;
-					this.planilla.dias[this.id_dia].turnos[this.id_turno].empleados.push(this.objectKeys(this.empleados)[this.id_empleado]);
+					this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas += this.id_turno_fin - this.id_turno_inicio;
+					var turnObj = {empleado:this.objectKeys(this.empleados)[this.id_empleado],inicio:Number(this.id_turno_inicio),duracion:this.id_turno_fin - this.id_turno_inicio};
+					this.planilla.dias[this.id_dia].turnos.push(turnObj);
 					this.resetIds();
 				}else
 					swal({
@@ -73,8 +86,9 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 			        }).then((isOk: boolean) => {
 			            if(isOk){
 			            	this.unsavedChanges = true;
-							this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas++;
-							this.planilla.dias[this.id_dia].turnos[this.id_turno].empleados.push(this.objectKeys(this.empleados)[this.id_empleado]);
+							this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas += this.id_turno_fin - this.id_turno_inicio;
+							var turnObj = {empleado:this.objectKeys(this.empleados)[this.id_empleado],inicio:Number(this.id_turno_inicio),duracion:this.id_turno_fin - this.id_turno_inicio};
+							this.planilla.dias[this.id_dia].turnos.push(turnObj);
 							this.resetIds();
 			            }
 			        },(dismiss)=>console.log("Modal dismiss by",dismiss));
@@ -84,33 +98,63 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 			swal({title: 'Oops...',text: 'Seleccione un valor para cada campo',type: 'error',allowOutsideClick: false,allowEscapeKey: false,allowEnterKey: false,showCloseButton: true});
 	}
 
-	eliminarTurno(turno,pos){
+	eliminarTurno(dia,turnoIndex,idx){
 		this.unsavedChanges = true;
-		this.empleados[turno.empleados[pos]].horas--;
-		turno.empleados.splice(pos,1);
+		var turno = this.planilla.dias[dia].turnos[turnoIndex];
+		this.empleados[turno.empleado].horas -= turno.duracion;
+		this.planilla.dias[dia].turnos.splice(turnoIndex,1);
+		this.turnosModal.splice(idx,1);
 	}
 
 	detalleTurno(dia,turno,modal){
-		if(this.planilla.dias[dia].turnos[turno].empleados.length!==0){
+		this.turnosModal.length = 0; //Limpia arr modal
+		var turnos = this.planilla.dias[dia].turnos.filter(function(t){return (t.inicio === turno || (Number(t.inicio+t.duracion) > turno) && t.inicio < turno)});
+		if(turnos.length!==0){
 			this.diaSeleccionado = dia;
 			this.turnoSeleccionado = turno;
+			for(let i = 0;i<turnos.length;++i) {
+				this.turnosModal.push({
+					nombre:this.empleados[turnos[i].empleado].nombre,
+					cargo:this.empleados[turnos[i].empleado].cargo,
+					inicio:(turnos[i].inicio+8)+":00",
+					fin:(turnos[i].inicio+turnos[i].duracion+8)+":00",
+					idx:Number(this.planilla.dias[dia].turnos.indexOf(turnos[i]))
+				});
+			}
 			this.modalService.open(modal);
 		}
 	}
 
+	comprobarTurno(dia,inicio,fin,empleado) {
+		var turnos:any[] = this.planilla.dias[dia].turnos.filter(function(a) { 
+			return a.empleado == empleado;
+		});
+		for(let i = 0; i < turnos.length;i++) {
+			if(inicio >= turnos[i].inicio || fin <= (turnos[i].inicio + turnos[i].duracion))
+				return false;
+		}
+		return true;
+	}
+
 	comprobarSeleccion(){
-		return this.id_dia != -1 && this.id_turno != -1 && this.id_cargo != -1 && this.id_empleado != -1;
+		return this.id_dia != -1 && this.id_turno_inicio != -1 && this.id_turno_fin != -1 && this.id_cargo != -1 && this.id_empleado != -1;
 	}
 
 	resetIds(){
 		this.id_dia = -1;
-		this.id_turno = -1;
+		this.id_turno_inicio = -1;
+		this.id_turno_fin = -1;
 		this.id_cargo = -1;
 		this.id_empleado = -1;
 	}
 
 	puedeDesactivar(){
 		return !this.unsavedChanges;
+	}
+
+	hayTurnos(n:number,dia:number) {
+		var turnos = this.planilla.dias[dia].turnos.filter(function(t){return (t.inicio === n || (Number(t.inicio+t.duracion) > n) && t.inicio < n)})
+		return turnos.length;
 	}
 
 }
