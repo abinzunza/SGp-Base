@@ -2,10 +2,9 @@
 	text-align: center;
 }#tablaHorario {
 	font-family: sans-serif;
-	width: 80%;
-	margin: auto;
 	table-layout: fixed;
 	border-collapse: separate;
+	font-size: calc(1px + 0.8vw);
 }
 #trTablaHorario:nth-child(even) {
 	background-color: #D5F5E3;
@@ -17,9 +16,12 @@
 	background-color: #00ad84;
 	color: #d5f5dd;
 }
-
+#tablaModal, button {
+	font-size: calc(5px + 0.8vw);
+}
 label {
 	font-weight: bold;
+	font-size: calc(5px + 0.8vw);
 }
 td, th {
 	text-align: center;
@@ -28,4 +30,7 @@ td, th {
 }
 i {
 	color:grey;
+}
+h2 {
+	font-size: calc(1rem + 1vw);
 }
