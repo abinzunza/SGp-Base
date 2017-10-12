@@ -132,7 +132,11 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 			return a.empleado == empleado;
 		});
 		for(let i = 0; i < turnos.length;i++) {
-			if(inicio >= turnos[i].inicio || fin <= (turnos[i].inicio + turnos[i].duracion))
+			if(
+				(inicio >= turnos[i].inicio && inicio < (turnos[i].inicio + turnos[i].duracion)) || 
+				(fin > turnos[i].inicio && fin <= (turnos[i].inicio + turnos[i].duracion)) ||
+				(inicio < turnos[i].inicio && fin > (turnos[i].inicio + turnos[i].duracion))
+			)
 				return false;
 		}
 		return true;
