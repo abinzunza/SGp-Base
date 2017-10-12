@@ -16,7 +16,8 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 	
 	unsavedChanges:boolean = false;
 	id_dia:number = -1;
-	id_turno:number = -1;
+	id_turno_inicio:number = -1;
+	id_turno_fin:number = -1;
 	id_cargo:number = -1;
 	id_empleado:number = -1;
 	diaSeleccionado = -1;
@@ -29,6 +30,17 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 
 	constructor(private turnoService:TurnoService, private route: ActivatedRoute, private router:Router, private modalService:NgbModal){}
 
+	fines(inicio:number):number[] {
+		if(inicio===-1)
+			return [];
+		let a = [];
+		for(let i = inicio; i < 9; i++) {
+			a.push(Number(i)+1);
+		}
+		return a;
+	}
+
+
 	ngOnInit(){
 		this.cargos = ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología'];
 		this.diasSemana = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
@@ -37,7 +49,9 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 		this.route.params.subscribe(params => this.turnoService.obtenerPlanilla(new Date(params['id'])).
 			subscribe(resPlanilla => {
 				this.planilla = resPlanilla;
-				this.planilla.dias.forEach(dia=>dia.turnos.forEach(turno=>turno.empleados.forEach(empleado=>this.empleados[empleado].horas++)));
+				this.planilla.dias.forEach(dia=>dia.turnos.forEach(turno=>{
+					this.empleados[turno.empleado].horas += turno.duracion;
+				}));
 			}));
 	}
 
@@ -46,13 +60,27 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 		this.turnoService.modificarPlanilla(this.planilla).subscribe(null,null,()=>this.router.navigate(['/mostrarPlanillas']));
 	}
 
+	comprobarTurno(dia,inicio,fin) {
+		var turnos:any[] = this.planilla.dias[dia].turnos.map(function(a) { 
+			if(a.empleado == this.id_empleado)
+				return a;
+		});
+		for(let i = 0; i < turnos.length;i++) {
+			if(inicio >= turnos[i].inicio || fin <= (turnos[i].inicio + turnos[i].duracion))
+				return false;
+		}
+		return true;
+	}
+
 	agregarTurno(){
 		if(this.comprobarSeleccion()){
-			if(this.planilla.dias[this.id_dia].turnos[this.id_turno].empleados.indexOf(this.objectKeys(this.empleados)[this.id_empleado])===-1){
-				if(this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas<1){
+			if(this.comprobarTurno(this.id_dia,this.id_turno_inicio,this.id_turno_fin)){
+				if(this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas<45){
 					this.unsavedChanges = true;
-					this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas++;
-					this.planilla.dias[this.id_dia].turnos[this.id_turno].empleados.push(this.objectKeys(this.empleados)[this.id_empleado]);
+					this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas += this.id_turno_fin - this.id_turno_inicio;
+					var turnObj = {empleado:this.objectKeys(this.empleados)[this.id_empleado],inicio:this.id_turno_inicio,duracion:this.id_turno_fin - this.id_turno_inicio};
+					this.planilla.dias[this.id_dia].turnos.push(turnObj);
+					console.log(turnObj);
 					this.resetIds();
 				}else
 					swal({
@@ -72,7 +100,7 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 			            if(isOk){
 			            	this.unsavedChanges = true;
 							this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas++;
-							this.planilla.dias[this.id_dia].turnos[this.id_turno].empleados.push(this.objectKeys(this.empleados)[this.id_empleado]);
+							this.planilla.dias[this.id_dia].turnos.push({empleado:this.objectKeys(this.empleados)[this.id_empleado],inicio:this.id_turno_inicio,duracion:this.id_turno_fin - this.id_turno_inicio});
 							this.resetIds();
 			            }
 			        },(dismiss)=>console.log("Modal dismiss by",dismiss));
@@ -97,12 +125,13 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 	}
 
 	comprobarSeleccion(){
-		return this.id_dia != -1 && this.id_turno != -1 && this.id_cargo != -1 && this.id_empleado != -1;
+		return this.id_dia != -1 && this.id_turno_inicio != -1 && this.id_turno_fin != -1 && this.id_cargo != -1 && this.id_empleado != -1;
 	}
 
 	resetIds(){
 		this.id_dia = -1;
-		this.id_turno = -1;
+		this.id_turno_inicio = -1;
+		this.id_turno_fin = -1;
 		this.id_cargo = -1;
 		this.id_empleado = -1;
 	}

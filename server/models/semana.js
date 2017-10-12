@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 
 var turnoSchema = mongoose.Schema({
-	empleados:[{type: mongoose.Schema.Types.ObjectId}]
+	empleado:{type: mongoose.Schema.Types.ObjectId},
+	inicio:Number,
+	duracion:Number
 },{ versionKey: false });
 
 var diaSchema = mongoose.Schema({

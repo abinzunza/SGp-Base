@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class TurnoService {
 
-	headers = new Headers();;
+	headers = new Headers();
 
 	constructor(private http:Http) {}
   
