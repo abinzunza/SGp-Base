@@ -1,4 +1,4 @@
-import { Empleado } from './empleado';
+import { Funcionario } from './funcionario';
 export class Turno {
-	empleado:Empleado;
+	funcionario:Funcionario;
 }
