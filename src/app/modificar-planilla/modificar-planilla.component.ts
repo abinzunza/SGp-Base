@@ -65,7 +65,7 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 	agregarTurno(){
 		if(this.comprobarSeleccion()){
 			if(this.comprobarTurno(this.id_dia,this.id_turno_inicio,this.id_turno_fin,this.objectKeys(this.funcionarios)[this.id_funcionario])){
-				if(this.funcionarios[this.objectKeys(this.funcionarios)[this.id_funcionario]].horas<45){
+				if(this.funcionarios[this.objectKeys(this.funcionarios)[this.id_funcionario]].horas<44){
 					this.unsavedChanges = true;
 					this.funcionarios[this.objectKeys(this.funcionarios)[this.id_funcionario]].horas += this.id_turno_fin - this.id_turno_inicio;
 					var turnObj = {funcionario:this.objectKeys(this.funcionarios)[this.id_funcionario],inicio:Number(this.id_turno_inicio),duracion:this.id_turno_fin - this.id_turno_inicio};
