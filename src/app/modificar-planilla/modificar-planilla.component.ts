@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { WebService } from '../servicios/Web.service';
+import { WebService } from '../servicios/web.service';
 import { IPlanillaCanDeactivate } from '../guard/iplanilla-candeactivate';
 declare var swal:any;
 
