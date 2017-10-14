@@ -3,7 +3,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class TurnoService {
+export class WebService {
 
 	headers = new Headers();
 
@@ -13,8 +13,8 @@ export class TurnoService {
 	  	return this.http.post('http://localhost:2100/crearPlanilla',planilla,this.headers);
 	}
 
-	obtenerEmpleados(){
-    	return this.http.get('http://localhost:2100/obtenerEmpleados').map(res=>res.json());
+	obtenerFuncionarios(){
+    		return this.http.get('http://localhost:2100/obtenerFuncionarios').map(res=>res.json());
 	}
 
 	obtenerPlanilla(fecha:Date){
