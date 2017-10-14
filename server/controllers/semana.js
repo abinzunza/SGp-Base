@@ -1,4 +1,4 @@
-var Planilla = require("../models/semana");
+var Planilla = require("../models/planilla");
 
 exports.crearPlanilla = ((req,res)=>{
     Planilla.create(req.body,
