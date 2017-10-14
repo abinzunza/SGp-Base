@@ -6,3 +6,32 @@
 	margin-bottom: 10px;
 	width: 100%;
 }
+#tituloTablaHorario { 
+	text-align: center;
+}
+#btnRedondo {
+    background-color: #00ad84;
+	border-radius: 10px;
+	border: none;
+	font-size: 10px;
+}
+#btnRedondo i {
+	color:#d5f5dd;
+}
+#trTablaHorario:nth-child(even) {
+	background-color: #D5F5E3;
+}
+#tablaModal th {
+	background-color: #00ad84;
+	color: #d5f5dd;
+}
+i {
+	color:grey;
+}
+h2 {
+	font-size: calc(1rem + 1vw);
+}
+label {
+	font-weight: bold;
+	font-size: calc(5px + 0.8vw);
+}
