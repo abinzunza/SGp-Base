@@ -1,9 +1,9 @@
-import { Turnos } from './turnos';
+import { Turno } from './turno';
 export class Dia{
-	turnos:Turnos[];
+	turnos:Turno[];
 	constructor(public fecha:Date){
 		this.turnos = new Array(
-			new Turnos(),new Turnos(),new Turnos(),new Turnos(),new Turnos(),new Turnos(),new Turnos(),new Turnos(),new Turnos()
+			new Turno(),new Turno(),new Turno(),new Turno(),new Turno(),new Turno(),new Turno(),new Turno(),new Turno()
 		);
 	}
 }
