@@ -1,0 +1,50 @@
+#tituloTablaHorario { 
+	text-align: center;
+}#tablaHorario {
+	font-family: sans-serif;
+	table-layout: fixed;
+	border-collapse: separate;
+	font-size: calc(1px + 0.8vw);
+}
+#trTablaHorario:nth-child(even) {
+	background-color: #D5F5E3;
+}
+#tdTablaHorario:hover {
+	border-color: #17a2b8;
+}
+#tablaModal th {
+	background-color: #00ad84;
+	color: #d5f5dd;
+}
+#btnRedondo {
+    background-color: #00ad84;
+	border-radius: 10px;
+	border: none;
+	font-size: 10px;
+}
+#btnRedondo i {
+	color:#d5f5dd;
+}
+#tablaModal, button {
+	font-size: calc(5px + 0.8vw);
+}
+select {
+	height: auto;
+	width: 90%;
+	max-width: 150px;
+}
+label {
+	font-weight: bold;
+	font-size: calc(5px + 0.8vw);
+}
+td, th {
+	text-align: center;
+	vertical-align: middle;
+	padding: 1px;
+}
+i {
+	color:grey;
+}
+h2 {
+	font-size: calc(1rem + 1vw);
+}
