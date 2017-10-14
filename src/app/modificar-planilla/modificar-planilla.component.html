@@ -31,9 +31,9 @@
 			</div>
 			<div class="col-4 mx-auto">
 				<label>Funcionario:</label>
-				<select class="custom-select" [(ngModel)]="id_empleado">
-					<ng-template ngFor let-key [ngForOf]="objectKeys(empleados)"; let-i = index>
-					    <option *ngIf="empleados[key].cargo == cargos[id_cargo]" value={{i}}>{{empleados[key].nombre}}</option>
+				<select class="custom-select" [(ngModel)]="id_funcionario">
+					<ng-template ngFor let-key [ngForOf]="objectKeys(funcionarios)"; let-i = index>
+					    <option *ngIf="funcionarios[key].cargo == cargos[id_cargo]" value={{i}}>{{funcionarios[key].nombre}}</option>
 					</ng-template> 
 				</select>
 			</div>
