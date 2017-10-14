@@ -1,16 +1,11 @@
-#tablaHorario {
+#tabla {
 	font-family: sans-serif;
-	width: 80%;
-	margin: auto;
 	table-layout: fixed;
 	border-collapse: separate;
+	font-size: calc(1px + 0.8vw);
 }
 td, th {
 	text-align: center;
 	vertical-align: middle;
 	padding: 1px;
-}
-th {
-	background-color: #00ad84;
-	color: #d5f5dd;
 }
