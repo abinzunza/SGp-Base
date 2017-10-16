@@ -1,21 +1,36 @@
 <div class="container">
-	<h1>Registro de planillas</h1>
-	<table class="table table-bordered table-responsive" id="tabla">
-		<tr>
-			<th>Fecha</th>
-			<th>Opciones</th>
-		</tr>
-		<tr *ngFor="let planilla of planillas; let i = index ">
-			<td>{{planilla.fecha_inicio | date}}</td>
-			<td>
-				<a routerLink="/verPlanilla/{{planilla.fecha_inicio}}"><button class="btn btn-info">Ver Planilla</button></a>
-				<a routerLink="/modificarPlanilla/{{planilla.fecha_inicio}}"><button class="btn btn-primary">Modificar Planilla</button></a>
-				<button class="btn btn-danger" (click)="eliminarPlanilla(planilla.fecha_inicio,i)">Eliminar</button>
-			</td>
-		</tr>
+	<h2>Planillas</h2>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Fecha Inicio</th>
+				<th>Fecha Fin</th>
+				<th>Opciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let planilla of planillas; let i = index ">
+				<td>{{i+1}}</td>
+				<td>{{planilla.fecha_inicio | date}}</td>
+				<td>{{planilla.fecha_fin | date}}</td>
+				<td>
+					<div class="row" align="center">
+						<div class="col mx-auto">
+							<a routerLink="/verPlanilla/{{planilla.fecha_inicio}}"><i class="fa fa-search fa-lg"></i></a>
+						</div>
+						<div class="col mx-auto">
+							<a routerLink="/modificarPlanilla/{{planilla.fecha_inicio}}"><i class="fa fa-pencil fa-lg"></i></a>
+						</div>
+						<div class="col mx-auto">
+							<i class="fa fa-trash-o fa-lg" (click)="eliminarPlanilla(planilla.fecha_inicio,i)"></i>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 </div>
-<br>
 <div align="center">
 	<a routerLink="/crearPlanilla"><button class="btn btn-primary">Crear planilla</button></a>
 </div>	
