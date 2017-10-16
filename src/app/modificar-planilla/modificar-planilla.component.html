@@ -1,5 +1,5 @@
-<div class="container my-3">
-	<h2>Modificar Planilla de Turnos</h2>
+<div class="container my-3" id="horario">
+	<h1>Modificar Planilla de Turnos</h1>
 	<label class="ml-5">Semana:	{{planilla?.fecha_inicio | date}} -- {{planilla?.fecha_fin | date}}</label>
 	<div align="center">
 		<div class="row my-2">
@@ -44,7 +44,7 @@
 			</div>
 		</div>
 	</div>
-	<h2 id="tituloTablaHorario">Horarios</h2>
+	<h2>Horarios</h2>
 	<div class="row">
 		<div class="col-10 mx-auto">
 			<table class="table table-bordered" id="tablaHorario">
@@ -55,7 +55,7 @@
 			    	</tr>
 			  	</thead>
 			  	<tbody>
-			    	<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" id="trTablaHorario">
+			    	<tr *ngFor = "let n of [0,1,2,3,4,5,6,7,8]">
 			      		<td> {{n+8}}:00 - {{n+9}}:00</td>
 			      		<td (click)="detalleTurno(i,n,modal)" id="tdTablaHorario" *ngFor="let dia of planilla?.dias; let i = index ">
 			        		<i *ngIf="hayTurnos(n,i)>0" [ngClass]="hayTurnos(n,i)>1?'fa fa-users':'fa fa-user'"></i>
@@ -77,8 +77,8 @@
         	<span>×</span>
         </button>
 	</div>
-	<div class="modal-body">
-		<table class="table table-bordered" id="tablaModal">
+	<div class="modal-body" id="miTabla">
+		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
 					<th>Funcionario</th>
