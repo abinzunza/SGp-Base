@@ -1,7 +1,7 @@
 import * as _ from 'underscore';
 
 export class PaginadorService {
-    obtenerPaginador(totalItems: number, paginaActual: number = 1, tamanoPagina: number = 2) {
+    obtenerPaginador(totalItems: number, paginaActual: number = 1, tamanoPagina: number = 5) {
         // calculate total pages
         let paginasTotales = Math.ceil(totalItems / tamanoPagina);
 
