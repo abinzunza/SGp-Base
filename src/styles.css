@@ -6,3 +6,39 @@
 	margin-bottom: 10px;
 	width: 100%;
 }
+#miTabla table{
+	border-collapse: separate;
+	border: 1px solid #e9ecef;
+}
+#miTabla th{
+	background-color: #00ad84;
+	color: #d5f5dd;
+}
+#horario h2{
+	text-align: center;
+}
+#horario tr:nth-child(even){
+	background-color: #D5F5E3;
+}
+#btnRedondo {
+    	background-color: #00ad84;
+	border-radius: 10px;
+	border: none;
+	font-size: 10px;
+}
+#btnRedondo i {
+	color:#d5f5dd;
+}
+i {
+	color:grey;
+}
+h1 {
+	font-size: calc(1.2rem + 1vw);
+}
+h2 {
+	font-size: calc(1rem + 1vw);
+}
+label {
+	font-weight: bold;
+	font-size: calc(5px + 0.8vw);
+}

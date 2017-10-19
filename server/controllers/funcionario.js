@@ -1,7 +1,7 @@
-var Empleado = require("../models/empleado");
+var Funcionario = require("../models/funcionario");
 
-exports.obtenerEmpleados=((req,res)=>
-    Empleado.find(null,
+exports.obtenerFuncionarios=((req,res)=>
+    Funcionario.find(null,
     (err,docs)=>{
         if(!err){
             res.json(docs);

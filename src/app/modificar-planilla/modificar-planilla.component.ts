@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TurnoService } from '../servicios/turno.service';
+import { WebService } from '../servicios/web.service';
 import { IPlanillaCanDeactivate } from '../guard/iplanilla-candeactivate';
 declare var swal:any;
 
@@ -9,7 +9,7 @@ declare var swal:any;
     selector: 'app-modificarPlanilla',
   	templateUrl: './modificar-planilla.component.html',
   	styleUrls: ['./modificar-planilla.component.css'],
-  	providers: [TurnoService]
+  	providers: [WebService]
 })
 
 export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
@@ -19,17 +19,17 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 	id_turno_inicio:number = -1;
 	id_turno_fin:number = -1;
 	id_cargo:number = -1;
-	id_empleado:number = -1;
+	id_funcionario:number = -1;
 	diaSeleccionado = -1;
 	turnoSeleccionado = -1;
-	empleados = {};
+	funcionarios = {};
 	objectKeys = Object.keys;
 	cargos = [];
 	diasSemana = [];
 	planilla = null;
 	turnosModal:any[] = [];
 
-	constructor(private turnoService:TurnoService, private route: ActivatedRoute, private router:Router, private modalService:NgbModal){}
+	constructor(private webService:WebService, private route: ActivatedRoute, private router:Router, private modalService:NgbModal){}
 
 	fines(inicio:number):number[] {
 		if(inicio===-1)
@@ -45,35 +45,35 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 	ngOnInit(){
 		this.cargos = ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología'];
 		this.diasSemana = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
-		this.turnoService.obtenerEmpleados()
-			.subscribe(resEmpleados => resEmpleados.forEach(elemento => this.empleados[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo,horas:0}));
-		this.route.params.subscribe(params => this.turnoService.obtenerPlanilla(new Date(params['id'])).
+		this.webService.obtenerFuncionarios()
+			.subscribe(resFuncionarios => resFuncionarios.forEach(elemento => this.funcionarios[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo,horas:0}));
+		this.route.params.subscribe(params => this.webService.obtenerPlanilla(new Date(params['id'])).
 			subscribe(resPlanilla => {
 				this.planilla = resPlanilla;
 				this.planilla.dias.forEach(dia=>dia.turnos.forEach(turno=>{
-					if(this.empleados[turno.empleado] !== undefined)
-						this.empleados[turno.empleado].horas += turno.duracion;
+					if(this.funcionarios[turno.funcionario] !== undefined)
+						this.funcionarios[turno.funcionario].horas += turno.duracion;
 				}));
 			}));
 	}
 
 	modificarPlanilla(){
 		this.unsavedChanges = false;
-		this.turnoService.modificarPlanilla(this.planilla).subscribe(null,null,()=>this.router.navigate(['/mostrarPlanillas']));
+		this.webService.modificarPlanilla(this.planilla).subscribe(null,null,()=>this.router.navigate(['/mostrarPlanillas']));
 	}
 
 	agregarTurno(){
 		if(this.comprobarSeleccion()){
-			if(this.comprobarTurno(this.id_dia,this.id_turno_inicio,this.id_turno_fin,this.objectKeys(this.empleados)[this.id_empleado])){
-				if(this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas<45){
+			if(this.comprobarTurno(this.id_dia,this.id_turno_inicio,this.id_turno_fin,this.objectKeys(this.funcionarios)[this.id_funcionario])){
+				if(this.funcionarios[this.objectKeys(this.funcionarios)[this.id_funcionario]].horas<44){
 					this.unsavedChanges = true;
-					this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas += this.id_turno_fin - this.id_turno_inicio;
-					var turnObj = {empleado:this.objectKeys(this.empleados)[this.id_empleado],inicio:Number(this.id_turno_inicio),duracion:this.id_turno_fin - this.id_turno_inicio};
+					this.funcionarios[this.objectKeys(this.funcionarios)[this.id_funcionario]].horas += this.id_turno_fin - this.id_turno_inicio;
+					var turnObj = {funcionario:this.objectKeys(this.funcionarios)[this.id_funcionario],inicio:Number(this.id_turno_inicio),duracion:this.id_turno_fin - this.id_turno_inicio};
 					this.planilla.dias[this.id_dia].turnos.push(turnObj);
 					this.resetIds();
 				}else
 					swal({
-			            text: 'Éste empleado cumplió las 44 horas. ¿Estás seguro de añadirle un nuevo turno?',
+			            text: 'Éste funcionario cumplió las 44 horas. ¿Estás seguro de añadirle un nuevo turno?',
 			            type: 'warning',
 			            allowOutsideClick: false,
 			            allowEscapeKey: false,
@@ -88,14 +88,14 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 			        }).then((isOk: boolean) => {
 			            if(isOk){
 			            	this.unsavedChanges = true;
-							this.empleados[this.objectKeys(this.empleados)[this.id_empleado]].horas += this.id_turno_fin - this.id_turno_inicio;
-							var turnObj = {empleado:this.objectKeys(this.empleados)[this.id_empleado],inicio:Number(this.id_turno_inicio),duracion:this.id_turno_fin - this.id_turno_inicio};
+							this.funcionarios[this.objectKeys(this.funcionarios)[this.id_funcionario]].horas += this.id_turno_fin - this.id_turno_inicio;
+							var turnObj = {funcionario:this.objectKeys(this.funcionarios)[this.id_funcionario],inicio:Number(this.id_turno_inicio),duracion:this.id_turno_fin - this.id_turno_inicio};
 							this.planilla.dias[this.id_dia].turnos.push(turnObj);
 							this.resetIds();
 			            }
 			        },(dismiss)=>console.log("Modal dismiss by",dismiss));
 			}else
-				swal({title: 'Oops...',text: 'Éste empleado ya se encuentra en éste turno',type: 'error',allowOutsideClick: false,allowEscapeKey: false,allowEnterKey: false,showCloseButton: true});
+				swal({title: 'Oops...',text: 'Éste funcionario ya se encuentra en éste turno',type: 'error',allowOutsideClick: false,allowEscapeKey: false,allowEnterKey: false,showCloseButton: true});
 		}else
 			swal({title: 'Oops...',text: 'Seleccione un valor para cada campo',type: 'error',allowOutsideClick: false,allowEscapeKey: false,allowEnterKey: false,showCloseButton: true});
 	}
@@ -103,7 +103,7 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 	eliminarTurno(dia,turnoIndex,idx){
 		this.unsavedChanges = true;
 		var turno = this.planilla.dias[dia].turnos[turnoIndex];
-		this.empleados[turno.empleado].horas -= turno.duracion;
+		this.funcionarios[turno.funcionario].horas -= turno.duracion;
 		this.planilla.dias[dia].turnos.splice(turnoIndex,1);
 		this.turnosModal.splice(idx,1);
 	}
@@ -116,8 +116,8 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 			this.turnoSeleccionado = turno;
 			for(let i = 0;i<turnos.length;++i) {
 				this.turnosModal.push({
-					nombre:this.empleados[turnos[i].empleado].nombre,
-					cargo:this.empleados[turnos[i].empleado].cargo,
+					nombre:this.funcionarios[turnos[i].funcionario].nombre,
+					cargo:this.funcionarios[turnos[i].funcionario].cargo,
 					inicio:(turnos[i].inicio+8)+":00",
 					fin:(turnos[i].inicio+turnos[i].duracion+8)+":00",
 					idx:Number(this.planilla.dias[dia].turnos.indexOf(turnos[i]))
@@ -127,19 +127,23 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 		}
 	}
 
-	comprobarTurno(dia,inicio,fin,empleado) {
+	comprobarTurno(dia,inicio,fin,funcionario) {
 		var turnos:any[] = this.planilla.dias[dia].turnos.filter(function(a) { 
-			return a.empleado == empleado;
+			return a.funcionario == funcionario;
 		});
 		for(let i = 0; i < turnos.length;i++) {
-			if(inicio >= turnos[i].inicio || fin <= (turnos[i].inicio + turnos[i].duracion))
+			if(
+				(inicio >= turnos[i].inicio && inicio < (turnos[i].inicio + turnos[i].duracion)) || 
+				(fin > turnos[i].inicio && fin <= (turnos[i].inicio + turnos[i].duracion)) ||
+				(inicio < turnos[i].inicio && fin > (turnos[i].inicio + turnos[i].duracion))
+			)
 				return false;
 		}
 		return true;
 	}
 
 	comprobarSeleccion(){
-		return this.id_dia != -1 && this.id_turno_inicio != -1 && this.id_turno_fin != -1 && this.id_cargo != -1 && this.id_empleado != -1;
+		return this.id_dia != -1 && this.id_turno_inicio != -1 && this.id_turno_fin != -1 && this.id_cargo != -1 && this.id_funcionario != -1;
 	}
 
 	resetIds(){
@@ -147,7 +151,7 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 		this.id_turno_inicio = -1;
 		this.id_turno_fin = -1;
 		this.id_cargo = -1;
-		this.id_empleado = -1;
+		this.id_funcionario = -1;
 	}
 
 	puedeDesactivar(){

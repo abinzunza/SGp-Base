@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { LOCALE_ID } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PaginadorService } from './servicios/paginador.service';
 
 import { AppComponent } from './app.component';
 import { MostrarPlanillasComponent } from './mostrar-planillas/mostrar-planillas.component';
@@ -16,9 +17,9 @@ import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.
 const appRoutes: Routes = [
 	{ path: '', redirectTo: '/mostrarPlanillas', pathMatch: 'full' },
 	{ path: 'mostrarPlanillas', component: MostrarPlanillasComponent },
-  { path: 'crearPlanilla', component: CrearPlanillaComponent, canDeactivate:[CrearPlanillaDeactivateGuard] },
-  { path: 'verPlanilla/:id', component: VerPlanillaComponent },
-  { path: 'modificarPlanilla/:id', component: ModificarPlanillaComponent, canDeactivate:[CrearPlanillaDeactivateGuard] }
+  	{ path: 'crearPlanilla', component: CrearPlanillaComponent, canDeactivate:[CrearPlanillaDeactivateGuard] },
+  	{ path: 'verPlanilla/:id', component: VerPlanillaComponent },
+  	{ path: 'modificarPlanilla/:id', component: ModificarPlanillaComponent, canDeactivate:[CrearPlanillaDeactivateGuard] }
 ];
 
 @NgModule({
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard],
+  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
