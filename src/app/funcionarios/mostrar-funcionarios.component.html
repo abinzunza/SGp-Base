@@ -104,10 +104,11 @@
 			    	<label for="selectCargo">Cargo</label>
 		      		<select class="custom-select form-control form-control-sm" id="selectCargo" formControlName="cargo" required>
 		      			<option>Seleccione su cargo</option>
-					  	<option>Tens</option>
-					  	<option>Lab Andrología</option>
-					  	<option>Administrativo</option>
-					</select>
+					<option>Tens</option>
+					<option>Lab Andrología</option>
+					<option>Administrativo</option>
+					<option *ngFor = "let cargo of ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología']";
+				</select>
 				</div>
 		  	</div>
 		  	<div class="form-row my-3">
@@ -117,7 +118,7 @@
 			    </div>
 			    <div class="col">
 			    	<label for="inputEmail">Email</label>
-		      		<input type="email" class="form-control form-control-sm" placeholder="Introduzca su email" id="inputEmail" formControlName="email" required>
+		      		<input type="email" class="form-control form-control-sm" ,placeholder="Introduzca su email" id="inputEmail" formControlName="email" required>
 		    	</div>
 		  	</div>
 		  	<div class="form-row my-3">
