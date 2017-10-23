@@ -11,7 +11,10 @@ router.use((req, res, next) => {
     next();
 });
 
+router.post("/crearFuncionario",Funcionario.crearFuncionario);
 router.get("/obtenerFuncionarios",Funcionario.obtenerFuncionarios);
+router.put("/modificarFuncionario",Funcionario.modificarFuncionario);
+router.delete("/eliminarFuncionario",Funcionario.eliminarFuncionario);
 
 router.post("/crearPlanilla",Planilla.crearPlanilla);
 router.get("/obtenerPlanilla",Planilla.obtenerPlanilla);
