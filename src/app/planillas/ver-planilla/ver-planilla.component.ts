@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
-import { WebService } from '../servicios/web.service';
+import { WebService } from '../../servicios/web.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

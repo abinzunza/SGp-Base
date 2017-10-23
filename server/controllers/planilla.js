@@ -6,6 +6,7 @@ exports.crearPlanilla = ((req,res)=>{
         if(!err){
             res.status(200).send("Listo")
         }else{
+            console.log(err);
             res.status(207).send("Error");
         }
     });
@@ -20,6 +21,7 @@ exports.modificarPlanilla = ((req,res)=>{
         if(!err){
             res.status(200).send("Listo")
         }else{
+            console.log(err);
             res.status(207).send("Error");
         }
     });
@@ -33,6 +35,7 @@ exports.eliminarPlanilla = ((req,res)=>{
         if(!err){
             res.status(200).send("Listo")
         }else{
+            console.log(err);
             res.status(207).send("Error");
         }
     });
@@ -46,6 +49,7 @@ exports.obtenerPlanilla = ((req,res)=>{
         if(!err){
             res.json(docs);
         }else{
+            console.log(err);
             res.status(404).send("Error");
         }
     });
@@ -57,6 +61,7 @@ exports.obtenerPlanillas = ((req,res)=>{
         if(!err){
             res.json(docs);
         }else{
+            console.log(err);
             res.status(404).send("Error");
         }
     });
@@ -80,6 +85,7 @@ exports.obtenerFecha = ((req,res)=>{
             }
         }
         else{
+            console.log(err);
             res.status(207).send("Error");
         }
     });

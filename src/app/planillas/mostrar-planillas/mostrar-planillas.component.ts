@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { WebService } from '../servicios/web.service';
-import { PaginadorService } from '../servicios/paginador.service';
+import { WebService } from '../../servicios/web.service';
+import { PaginadorService } from '../../servicios/paginador.service';
 declare var swal:any;
 
 @Component({
-    	selector: 'app-mostrar-planillas',
-    	templateUrl: './mostrar-planillas.component.html',
+    selector: 'app-mostrar-planillas',
+    templateUrl: './mostrar-planillas.component.html',
 	styleUrls: ['./mostrar-planillas.component.css'],
 	providers: [WebService]
 })
@@ -38,7 +38,7 @@ export class MostrarPlanillasComponent implements OnInit {
 			cancelButtonColor: 'red'
 		}).then((isOk: boolean) => {
 		    	if(isOk){
-				this.listaItems.splice(this.listaItems.indexOf(item),1);
+					this.listaItems.splice(this.listaItems.indexOf(item),1);
         			this.webService.eliminarPlanilla(new Date(item.fecha_inicio));
         			this.setearPagina(this.paginador.paginaActual-((this.paginador.indiceFinal===this.paginador.indiceInicial)?1:0));
 		    	}

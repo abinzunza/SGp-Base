@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { WebService } from '../servicios/web.service';
-import { IPlanillaCanDeactivate } from '../guard/iplanilla-candeactivate';
+import { WebService } from '../../servicios/web.service';
+import { IPlanillaCanDeactivate } from '../../guard/iplanilla-candeactivate';
 declare var swal:any;
 
 @Component({
@@ -59,7 +59,7 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 
 	modificarPlanilla(){
 		this.unsavedChanges = false;
-		this.webService.modificarPlanilla(this.planilla).subscribe(null,null,()=>this.router.navigate(['/mostrarPlanillas']));
+		this.webService.modificarPlanilla(this.planilla).subscribe(null,null,()=>this.router.navigate(['/planillas/mostrar']));
 	}
 
 	agregarTurno(){
