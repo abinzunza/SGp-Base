@@ -1,0 +1,59 @@
+<div class="container" id="miTabla">
+	<h2>Planillas</h2>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Fecha Inicio</th>
+				<th>Fecha Fin</th>
+				<th>Opciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of itemsPaginados; let i = index ">
+				<td>{{i+1+5*(paginador.paginaActual-1)}}</td>
+				<td>{{item.fecha_inicio | date}}</td>
+				<td>{{item.fecha_fin | date}}</td>
+				<td>
+					<div class="row" align="center">
+						<div class="col mx-auto">
+							<a routerLink="/planillas/ver/{{item.fecha_inicio}}"><i class="fa fa-search fa-lg"></i></a>
+						</div>
+						<div class="col mx-auto">
+							<a routerLink="/planillas/modificar/{{item.fecha_inicio}}"><i class="fa fa-pencil fa-lg"></i></a>
+						</div>
+						<div class="col mx-auto">
+							<i class="fa fa-trash-o fa-lg" (click)="eliminarPlanilla(item)"></i>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="row" align="center">
+	<div class="col mx-auto">
+		<a routerLink="/planillas/crear"><button class="btn btn-primary">Crear planilla</button></a>
+	</div>
+	<div class="col mx-auto">
+	    <nav>
+		  	<ul *ngIf="paginador.paginas && paginador.paginas.length" class="pagination justify-content-center">
+		    	<li class="page-item" [ngClass]="{disabled:paginador.paginaActual === 1}">
+		      		<a class="page-link" (click)="setearPagina(1)">Primera</a>
+		    	</li>
+		    	<li class="page-item" [ngClass]="{disabled:paginador.paginaActual === 1}">
+		    		<a class="page-link" (click)="setearPagina(paginador.paginaActual - 1)">Anterior</a>
+			    </li>
+			    <li *ngFor="let pagina of paginador.paginas" class="page-item" [ngClass]="{active:paginador.paginaActual === pagina}">
+			      	<a class="page-link" (click)="setearPagina(pagina)">{{pagina}}</a>
+			    </li>
+			    <li class="page-item" [ngClass]="{disabled:paginador.paginaActual === paginador.paginasTotales}">
+			    	<a class="page-link" (click)="setearPagina(paginador.paginaActual + 1)">Siguiente</a>
+			    </li>
+			    <li class="page-item" [ngClass]="{disabled:paginador.paginaActual === paginador.paginasTotales}">
+			      	<a class="page-link" (click)="setearPagina(paginador.paginasTotales)">Última</a>
+			    </li>
+		  	</ul>
+		</nav>
+	</div>
+</div>
