@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { WebService } from '../servicios/web.service';
 import { PaginadorService } from '../servicios/paginador.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { RutValidator } from '../validaciones/rut';
+import { EmailValidator } from '../validaciones/email';
+import { CelValidator } from '../validaciones/cel';
 declare var swal:any;
 
 @Component({
@@ -58,14 +61,28 @@ export class MostrarFuncionariosComponent implements OnInit {
 
 	crearFuncionario(modal){
 		this.modo = 'Crear';
-		this.form = this.fb.group({nombre:'',apellido:'',rut:'',cargo:'Seleccione su cargo',telefono:'',email:''});
+		this.form = this.fb.group({
+			nombre:'',
+			apellido:'',
+			rut:['',RutValidator.verificarRut],
+			cargo:'',
+			telefono:['',CelValidator.verificarFormatoCel],
+			email:['',EmailValidator.verificarFormatoEmail]
+		});
 		this.modal = this.modalService.open(modal);
 	}
 
 	modificarFuncionario(funcionario,modal){
 		this.funcionario = funcionario;
 		this.modo = 'Modificar';
-		this.form = this.fb.group({nombre:this.funcionario.nombre,apellido:this.funcionario.apellido,rut:this.funcionario.rut,cargo:this.funcionario.cargo,telefono:this.funcionario.telefono,email:this.funcionario.email});
+		this.form = this.fb.group({
+			nombre:this.funcionario.nombre,
+			apellido:this.funcionario.apellido,
+			rut:[this.funcionario.rut,RutValidator.verificarRut],
+			cargo:this.funcionario.cargo,
+			telefono:[this.funcionario.telefono,CelValidator.verificarFormatoCel],
+			email:[this.funcionario.email,EmailValidator.verificarFormatoEmail]
+		});
 		this.modal = this.modalService.open(modal);
 	}
 
@@ -77,7 +94,6 @@ export class MostrarFuncionariosComponent implements OnInit {
 			});
 		}
 		else {
-			console.log(this.listaItems);
 			funcionario._id = this.funcionario._id;
 			this.webService.modificarFuncionario(funcionario).subscribe(()=>this.listaItems[this.listaItems.indexOf(this.funcionario)] = funcionario,null,()=>{
 				this.modal.close();
