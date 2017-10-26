@@ -91,5 +91,4 @@ export class MostrarFuncionariosComponent implements OnInit {
    		this.itemsPaginados = this.listaItems.slice(this.paginador.indiceInicial, this.paginador.indiceFinal + 1);
    	}
 
-
 }

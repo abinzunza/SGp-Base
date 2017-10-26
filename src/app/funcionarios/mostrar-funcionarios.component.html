@@ -1,5 +1,5 @@
 <div class="container" id="miTabla">
-	<h2 (click)="mostrarFuncionarios()">Funcionarios</h2>
+	<h2>Funcionarios</h2>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -104,7 +104,7 @@
 			    	<label for="selectCargo">Cargo</label>
 		      		<select class="custom-select form-control form-control-sm" id="selectCargo" formControlName="cargo" required>
 		      			<option>Seleccione su cargo</option>
-					<option *ngFor = "let cargo of ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología']";
+						<option *ngFor = "let cargo of ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología']">{{cargo}}</option>
 				</select>
 				</div>
 		  	</div>

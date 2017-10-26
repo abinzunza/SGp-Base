@@ -37,7 +37,7 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 		this.cargos = ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología'];
 		this.diasSemana = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
 		this.webService.obtenerFuncionarios()
-			.subscribe(resFuncionarios => resFuncionarios.forEach(elemento => this.funcionarios[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo,horas:0}));
+			.subscribe(resFuncionarios => resFuncionarios.forEach(elemento => this.funcionarios[elemento._id] = {nombre:elemento.nombre,apellido:elemento.apellido,cargo:elemento.cargo,horas:0}));
 	}
 
 	fines(inicio:number):number[] {
