@@ -99,10 +99,13 @@ export class MostrarFuncionariosComponent implements OnInit {
 
 	guardarFuncionario(funcionario){
 		if(this.modo==='Crear'){
-			this.webService.crearFuncionario(funcionario).subscribe(nuevoFuncionario => this.listaItems.push(nuevoFuncionario.json()),null,()=>{
-				this.modal.close();
-				this.setearPagina(this.paginador.paginaActual + ((this.listaItems.length===1 && this.paginador.paginaActual===0)?1:0));
-			});
+			if(this.comprobarRut(funcionario.rut))
+				this.webService.crearFuncionario(funcionario).subscribe(nuevoFuncionario => this.listaItems.push(nuevoFuncionario.json()),null,()=>{
+					this.modal.close();
+					this.setearPagina(this.paginador.paginaActual + ((this.listaItems.length===1 && this.paginador.paginaActual===0)?1:0));
+				});
+			else
+				swal({title: 'Oops...',text: 'Éste rut ya se encuentra registrado',type: 'error',allowOutsideClick: false,allowEscapeKey: false,allowEnterKey: false,showCloseButton: true});
 		}
 		else {
 			funcionario._id = this.funcionario._id;
@@ -111,6 +114,13 @@ export class MostrarFuncionariosComponent implements OnInit {
 				this.setearPagina(this.paginador.paginaActual);
 			});
 		}
+	}
+
+	comprobarRut(rut){
+		for(let i=0;i<this.listaItems.length;i++)
+			if(this.listaItems[i].rut == rut)
+				return false;
+		return true;
 	}
 
     setearPagina(pagina:number){

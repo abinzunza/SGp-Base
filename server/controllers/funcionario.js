@@ -13,7 +13,7 @@ exports.crearFuncionario = ((req,res)=>{
     });
 });
 
-exports.obtenerFuncionarios = ((req,res)=>
+exports.obtenerFuncionarios = ((req,res)=>{
     Funcionario.find(null,
     (err,docs)=>{
         if(!err){
@@ -23,7 +23,7 @@ exports.obtenerFuncionarios = ((req,res)=>
             res.status(404).send("Error");
         }
     })
-);
+});
 
 exports.modificarFuncionario = ((req,res)=>
     Funcionario.replaceOne({
