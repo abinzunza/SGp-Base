@@ -22,7 +22,7 @@ exports.obtenerFuncionarios = ((req,res)=>
             console.log(err);
             res.status(404).send("Error");
         }
-    });
+    })
 );
 
 exports.modificarFuncionario = ((req,res)=>
@@ -37,7 +37,7 @@ exports.modificarFuncionario = ((req,res)=>
             console.log(err);
             res.status(207).send("Error");
         }
-    });
+    })
 );
 
 exports.eliminarFuncionario = ((req,res)=>
@@ -51,5 +51,5 @@ exports.eliminarFuncionario = ((req,res)=>
             console.log(err);
             res.status(207).send("Error");
         }
-    });
+    })
 );
