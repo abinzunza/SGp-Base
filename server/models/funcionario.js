@@ -6,7 +6,8 @@ var funcionarioSchema = mongoose.Schema({
 	rut:String,
 	cargo:String,
 	telefono:String,
-	email:String
+	email:String,
+	horasAcumuladas:Number
 },{ versionKey: false });
 
 module.exports = mongoose.model('Funcionario',funcionarioSchema);

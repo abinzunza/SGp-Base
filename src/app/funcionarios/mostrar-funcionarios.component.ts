@@ -50,6 +50,17 @@ export class MostrarFuncionariosComponent implements OnInit {
 		    		this.listaItems.splice(this.listaItems.indexOf(funcionario),1);
         			this.webService.eliminarFuncionario(funcionario);
         			this.setearPagina(this.paginador.paginaActual-((this.paginador.indiceFinal===this.paginador.indiceInicial)?1:0));
+        			this.webService.listarPlanillas().
+        				subscribe(planillas=>
+        					planillas.forEach(planilla=>{
+        						planilla.dias.forEach(dia=>
+        							dia.turnos.forEach(turno=>{
+        								if(funcionario._id==turno.funcionario)dia.turnos.splice(dia.turnos.indexOf(turno),1);
+        							})
+        						);
+        						this.webService.modificarPlanilla(planilla).subscribe();
+        					})
+        				);
         		}
 		},(dismiss)=>console.log("Modal dismiss by",dismiss));
   	}

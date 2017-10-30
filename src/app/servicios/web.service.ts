@@ -26,7 +26,6 @@ export class WebService {
 	}
 
 	listarPlanillas(){
-		console.log(this.url + 'obtenerPlanillas');
 		return this.http.get(this.url + 'obtenerPlanillas').map(res => res.json());
 	}
 
