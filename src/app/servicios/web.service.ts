@@ -26,7 +26,6 @@ export class WebService {
 	}
 
 	listarPlanillas(){
-		console.log(this.url + 'obtenerPlanillas');
 		return this.http.get(this.url + 'obtenerPlanillas').map(res => res.json());
 	}
 
@@ -50,7 +49,7 @@ export class WebService {
 	crearFuncionario(funcionario){
 		return this.http.post(this.url + 'crearFuncionario',funcionario,this.headers);
 	}
- 	
+
  	obtenerFuncionarios(){
     	return this.http.get(this.url + 'obtenerFuncionarios').map(res=>res.json());
 	}

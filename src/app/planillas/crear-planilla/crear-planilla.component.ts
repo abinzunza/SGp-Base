@@ -37,7 +37,12 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 		this.cargos = ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología'];
 		this.diasSemana = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
 		this.webService.obtenerFuncionarios()
-			.subscribe(resFuncionarios => resFuncionarios.forEach(elemento => this.funcionarios[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo,horas:0}));
+			.subscribe(resFuncionarios => 
+				resFuncionarios.forEach(elemento => {
+					this.funcionarios[elemento._id] = elemento;
+					this.funcionarios[elemento._id].horas = 0;
+				})
+			);
 	}
 
 	fines(inicio:number):number[] {
@@ -51,12 +56,15 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 	}
 
 	crearPlanilla(){
-		let fechaInicial, fechaFinal;
 		this.webService.obtenerFecha().subscribe(res => this.planilla = new Planilla(res.fecha_inicio,res.fecha_fin));
 	}
 
 	guardarPlanilla(){
 		this.unsavedChanges = false;
+		this.objectKeys(this.funcionarios).forEach(key=>{
+			this.funcionarios[key].horasAcumuladas+=this.funcionarios[key].horas-44;
+			this.webService.modificarFuncionario(this.funcionarios[key]).subscribe();
+		});
 		this.webService.guardarPlanilla(this.planilla).subscribe(null,null,()=>this.router.navigate(['/planillas/mostrar']));
 	}
 

@@ -31,34 +31,34 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 
 	constructor(private webService:WebService, private route: ActivatedRoute, private router:Router, private modalService:NgbModal){}
 
-	fines(inicio:number):number[] {
-		if(inicio===-1)
-			return [];
-		let a = [];
-		for(let i = inicio; i < 9; i++) {
-			a.push(Number(i)+1);
-		}
-		return a;
-	}
-
-
 	ngOnInit(){
 		this.cargos = ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología'];
 		this.diasSemana = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
 		this.webService.obtenerFuncionarios()
-			.subscribe(resFuncionarios => resFuncionarios.forEach(elemento => this.funcionarios[elemento._id] = {nombre:elemento.nombre,cargo:elemento.cargo,horas:0}));
+			.subscribe(resFuncionarios => 
+				resFuncionarios.forEach(elemento => {
+					this.funcionarios[elemento._id] = elemento;
+					this.funcionarios[elemento._id].horas = 0;
+					this.funcionarios[elemento._id].horasIniciales = 0;
+				})
+			);
 		this.route.params.subscribe(params => this.webService.obtenerPlanilla(new Date(params['id'])).
 			subscribe(resPlanilla => {
 				this.planilla = resPlanilla;
 				this.planilla.dias.forEach(dia=>dia.turnos.forEach(turno=>{
 					if(this.funcionarios[turno.funcionario] !== undefined)
 						this.funcionarios[turno.funcionario].horas += turno.duracion;
+						this.funcionarios[turno.funcionario].horasIniciales += turno.duracion;
 				}));
 			}));
 	}
 
 	modificarPlanilla(){
 		this.unsavedChanges = false;
+		this.objectKeys(this.funcionarios).forEach(key=>{
+			this.funcionarios[key].horasAcumuladas+=this.funcionarios[key].horas-this.funcionarios[key].horasIniciales;
+			this.webService.modificarFuncionario(this.funcionarios[key]).subscribe();
+		});
 		this.webService.modificarPlanilla(this.planilla).subscribe(null,null,()=>this.router.navigate(['/planillas/mostrar']));
 	}
 
@@ -156,6 +156,16 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 
 	puedeDesactivar(){
 		return !this.unsavedChanges;
+	}
+
+	fines(inicio:number):number[] {
+		if(inicio===-1)
+			return [];
+		let a = [];
+		for(let i = inicio; i < 9; i++) {
+			a.push(Number(i)+1);
+		}
+		return a;
 	}
 
 	hayTurnos(n:number,dia:number) {

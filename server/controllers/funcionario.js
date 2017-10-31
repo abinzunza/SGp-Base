@@ -1,6 +1,7 @@
 var Funcionario = require("../models/funcionario");
 
-exports.crearFuncionario = ((req,res)=>
+exports.crearFuncionario = ((req,res)=>{
+    req.body.horasAcumuladas=0;
     Funcionario.create(req.body,
     (err,docs)=>{
         if(!err){
@@ -9,9 +10,10 @@ exports.crearFuncionario = ((req,res)=>
             console.log(err);
             res.status(207).send("Error");
         }
-    }));
+    });
+});
 
-exports.obtenerFuncionarios = ((req,res)=>
+exports.obtenerFuncionarios = ((req,res)=>{
     Funcionario.find(null,
     (err,docs)=>{
         if(!err){
@@ -20,7 +22,8 @@ exports.obtenerFuncionarios = ((req,res)=>
             console.log(err);
             res.status(404).send("Error");
         }
-    }));
+    })
+});
 
 exports.modificarFuncionario = ((req,res)=>
     Funcionario.replaceOne({
@@ -34,7 +37,8 @@ exports.modificarFuncionario = ((req,res)=>
             console.log(err);
             res.status(207).send("Error");
         }
-    }));
+    })
+);
 
 exports.eliminarFuncionario = ((req,res)=>
     Funcionario.deleteOne({
@@ -47,4 +51,5 @@ exports.eliminarFuncionario = ((req,res)=>
             console.log(err);
             res.status(207).send("Error");
         }
-    }));
+    })
+);
