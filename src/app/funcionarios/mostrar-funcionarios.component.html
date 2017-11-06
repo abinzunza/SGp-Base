@@ -1,0 +1,133 @@
+<div class="container" id="miTabla">
+	<h2>Funcionarios</h2>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Cargo</th>
+				<th>Opciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of itemsPaginados; let i = index ">
+				<td>{{i+1+5*(paginador.paginaActual-1)}}</td>
+				<td>{{item.nombre}}</td>
+				<td>{{item.cargo}}</td>
+				<td>
+					<div class="row" align="center">
+						<div class="col mx-auto">
+							<i class="fa fa-search fa-lg" (click)="detalleFuncionario(item,detalle)"></i>
+						</div>
+						<div class="col mx-auto">
+							<i class="fa fa-pencil fa-lg" (click)="modificarFuncionario(item,crear_modificar)"></i>
+						</div>
+						<div class="col mx-auto">
+							<i class="fa fa-trash-o fa-lg" (click)="eliminarFuncionario(item)"></i>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="row" align="center">
+	<div class="col mx-auto">
+		<button class="btn btn-primary" (click)="crearFuncionario(crear_modificar)">Añadir funcionario</button>
+	</div>
+	<div class="col mx-auto">
+	    <nav>
+		  	<ul *ngIf="paginador.paginas && paginador.paginas.length" class="pagination justify-content-center">
+		    	<li class="page-item" [ngClass]="{disabled:paginador.paginaActual === 1}">
+		      		<a class="page-link" (click)="setearPagina(1)">Primera</a>
+		    	</li>
+		    	<li class="page-item" [ngClass]="{disabled:paginador.paginaActual === 1}">
+		    		<a class="page-link" (click)="setearPagina(paginador.paginaActual - 1)">Anterior</a>
+			    </li>
+			    <li *ngFor="let pagina of paginador.paginas" class="page-item" [ngClass]="{active:paginador.paginaActual === pagina}">
+			      	<a class="page-link" (click)="setearPagina(pagina)">{{pagina}}</a>
+			    </li>
+			    <li class="page-item" [ngClass]="{disabled:paginador.paginaActual === paginador.paginasTotales}">
+			    	<a class="page-link" (click)="setearPagina(paginador.paginaActual + 1)">Siguiente</a>
+			    </li>
+			    <li class="page-item" [ngClass]="{disabled:paginador.paginaActual === paginador.paginasTotales}">
+			      	<a class="page-link" (click)="setearPagina(paginador.paginasTotales)">Última</a>
+			    </li>
+		  	</ul>
+		</nav>
+	</div>
+</div>
+<ng-template #detalle let-c="close">
+	<div class="modal-header">
+		<h5 class="modal-title">{{funcionario.nombre}} {{funcionario.apellido}}</h5>
+		<button class="close" (click)="c()">
+        	<span>×</span>
+        </button>
+	</div>
+	<div class="modal-body">
+		<ul>
+	    	<li>Nombre: {{funcionario.nombre}}</li>
+	    	<li>Apellido: {{funcionario.apellido}}</li>
+	    	<li>Rut: {{funcionario.rut}}</li>
+	    	<li>Cargo: {{funcionario.cargo}}</li>
+	    	<li>Telefono: {{funcionario.telefono}}</li>
+	    	<li>Email: {{funcionario.email}}</li>
+	    </ul>
+	</div>
+</ng-template>
+<ng-template #crear_modificar let-c="close">
+	<div class="modal-header">
+		<h5 class="modal-title">{{modo}} funcionario</h5>
+		<button class="close" (click)="c()">
+        	<span>×</span>
+        </button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="form" (submit)="guardarFuncionario(form.value)">
+		  	<div class="form-row my-3">
+		    	<div class="col">
+		    		<label for="inputNombre">Nombre</label>
+		      		<input type="text" class="form-control form-control-sm" placeholder="Introduzca su nombre" id="inputNombre" formControlName="nombre" required>
+			    </div>
+			    <div class="col">
+			    	<label for="inputApellido">Apellido</label>
+		      		<input type="text" class="form-control form-control-sm" placeholder="Introduzca su apellido" id="inputApellido" formControlName="apellido" required>
+		    	</div>
+		  	</div>
+		  	<div class="form-row my-3">
+		    	<div class="col">
+		    		<label for="inputRut">Rut</label>
+		      		<input type="text" class="form-control form-control-sm" placeholder="Introduzca su rut" id="inputRut" formControlName="rut" [readOnly]="modo==='Modificar'" required> 
+		      		<small *ngIf="form?.controls.rut.errors?.formatoIncorrecto && form.controls.rut.dirty">Error de formato</small>
+		      		<small *ngIf="form?.controls.rut.errors?.rutIncorrecto && form.controls.rut.dirty">Rut incorrecto</small>
+			    </div>
+			    <div class="col">
+			    	<label for="selectCargo">Cargo</label>
+		      		<select class="custom-select form-control form-control-sm" id="selectCargo" formControlName="cargo" required>
+						<option *ngFor = "let cargo of ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología']">{{cargo}}</option>
+					</select>
+				</div>
+		  	</div>
+		  	<div class="form-row my-3">
+		    	<div class="col">
+		    		<label for="inputTelefono">Telefono</label>
+		      		<input type="tel" class="form-control form-control-sm" placeholder="Introduzca su telefono" id="inputTelefono" formControlName="telefono"  required>
+		      		<small *ngIf="form?.controls.telefono.errors && form.controls.telefono.dirty">Error de formato</small>
+			    </div>
+			    <div class="col">
+			    	<label for="inputEmail">Email</label>
+		      		<input type="email" class="form-control form-control-sm" placeholder="Introduzca su email" id="inputEmail" formControlName="email" required>
+		      		<small *ngIf="form?.controls.email.errors && form.controls.email.dirty">Error de formato</small>
+		    	</div>
+		  	</div>
+		  	<div class="form-row my-3">
+		  		<div class="col" align="right">
+		  			<button type="reset" class="btn btn-primary">Limpiar</button>
+		  		</div>
+		  		<div class="col">
+		  			<button type="submit" class="btn btn-primary" [disabled]="form?.controls.rut.errors || form?.controls.email.errors || form?.controls.telefono.errors">Guardar</button>	
+		  		</div>
+		  	</div>
+		</form>
+	</div>
+</ng-template>

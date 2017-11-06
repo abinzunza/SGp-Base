@@ -1,42 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { LOCALE_ID } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppComponent } from './app.component';
-import { MostrarPlanillasComponent } from './mostrar-planillas/mostrar-planillas.component';
-import { CrearPlanillaComponent } from './crear-planilla/crear-planilla.component';
-import { VerPlanillaComponent } from './ver-planilla/ver-planilla.component';
-import { ModificarPlanillaComponent } from './modificar-planilla/modificar-planilla.component';
-import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.guard';
+import { AppRoutingModule } from './app-routing.module';
 
-const appRoutes: Routes = [
-	{ path: '', redirectTo: '/mostrarPlanillas', pathMatch: 'full' },
-	{ path: 'mostrarPlanillas', component: MostrarPlanillasComponent },
-  { path: 'crearPlanilla', component: CrearPlanillaComponent, canDeactivate:[CrearPlanillaDeactivateGuard] },
-  { path: 'verPlanilla/:id', component: VerPlanillaComponent },
-  { path: 'modificarPlanilla/:id', component: ModificarPlanillaComponent, canDeactivate:[CrearPlanillaDeactivateGuard] }
-];
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { MostrarFuncionariosComponent } from './funcionarios/mostrar-funcionarios.component';
+
+import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.guard';
+import { PaginadorService } from './servicios/paginador.service';
+import { UserService } from './servicios/user.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    MostrarPlanillasComponent,
-    CrearPlanillaComponent,
-    VerPlanillaComponent,
-    ModificarPlanillaComponent
+    HomeComponent,
+    MostrarFuncionariosComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard],
+  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
