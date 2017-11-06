@@ -1,3 +1,6 @@
+.card{
+	font-size: 15px;
+}
 #tablaHorario {
 	font-family: sans-serif;
 	table-layout: fixed;
