@@ -14,6 +14,7 @@ import { MostrarFuncionariosComponent } from './funcionarios/mostrar-funcionario
 import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.guard';
 import { PaginadorService } from './servicios/paginador.service';
 
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,10 @@ import { PaginadorService } from './servicios/paginador.service';
     ReactiveFormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService],
   bootstrap: [AppComponent]
