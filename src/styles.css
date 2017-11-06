@@ -43,5 +43,18 @@ label {
 	font-size: calc(5px + 0.8vw);
 }
 .card {
-	font-size: calc(1px + 0.8vw);
+	font-size: 15px;
+}
+/*Placeholder Colors*/
+.form-control::-webkit-input-placeholder { /* Chrome y Safari */
+	color:#808080;
+}
+.form-control:-moz-placeholder { /* Firefox 18- */
+	color:#808080;
+}
+.form-control::-moz-placeholder { /* Firefox 19+ */
+	color:#808080;
+} 
+.form-control:-ms-input-placeholder { /* IE 10+ */
+	color:#808080;
 }

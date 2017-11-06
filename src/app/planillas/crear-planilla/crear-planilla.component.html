@@ -1,52 +1,70 @@
 <div class="container my-3" id="horario">
 	<h1>Crear Nueva Planilla de Turnos</h1>
 	<label class="ml-5">Semana:	{{planilla?.fecha_inicio | date}} -- {{planilla?.fecha_fin | date}}</label>
-	<div align="center">
-		<div class="row my-2">
-			<div class="col-4 mx-auto">
-				<label>Día:</label>
-				<select class="custom-select" [(ngModel)]="id_dia">
-					<option *ngFor = "let dias of diasSemana; let i = index " value="{{i}}">{{dias}}</option>
-				</select>
-			</div>
-			<div class="col-4 mx-auto">
-				<label>Inicio Turno:</label>
-				<select class="custom-select" [(ngModel)]="id_turno_inicio">
-					<option *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" value="{{n}}">{{n+8}}:00</option>
-				</select>
-			</div>
-			<div class="col-4 mx-auto">
-				<label>Fin Turno:</label>
-				<select class="custom-select" [(ngModel)]="id_turno_fin">
-					<option *ngFor = "let m of fines(id_turno_inicio)" value="{{m}}">{{m+8}}:00</option>
-				</select>
+	<div class="row">
+		<div class="col-12 col-lg-10">
+			<div align="center">
+				<div class="row mt-3">
+					<div class="col-4 mx-auto">
+						<label>Día:</label>
+						<select class="custom-select" [(ngModel)]="id_dia">
+							<option *ngFor = "let dias of diasSemana; let i = index " value="{{i}}">{{dias}}</option>
+						</select>
+					</div>
+					<div class="col-4 mx-auto">
+						<label>Inicio Turno:</label>
+						<select class="custom-select" [(ngModel)]="id_turno_inicio">
+							<option *ngFor = "let n of [0,1,2,3,4,5,6,7,8]" value="{{n}}">{{n+8}}:00</option>
+						</select>
+					</div>
+					<div class="col-4 mx-auto">
+						<label>Fin Turno:</label>
+						<select class="custom-select" [(ngModel)]="id_turno_fin">
+							<option *ngFor = "let m of fines(id_turno_inicio)" value="{{m}}">{{m+8}}:00</option>
+						</select>
+					</div>
+				</div>
+				<div class="row my-4">
+					<div class="col-4 mx-auto">
+						<label>Actividad:</label>
+						<select class="custom-select" [(ngModel)]="id_cargo">
+							<option *ngFor = "let cargo of cargos; let i = index " value="{{i}}">{{cargo}}</option>
+						</select>
+					</div>
+					<div class="col-4 mx-auto">
+						<label>Funcionario:</label>
+						<select class="custom-select" [(ngModel)]="id_funcionario">
+							<ng-template ngFor let-key [ngForOf]="objectKeys(funcionarios)"; let-i = index>
+							    <option *ngIf="funcionarios[key].cargo == cargos[id_cargo]" value={{i}}>{{funcionarios[key].nombre}}</option>
+							</ng-template> 
+						</select>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="row my-2">
-			<div class="col-4 mx-auto">
-				<label>Actividad:</label>
-				<select class="custom-select" [(ngModel)]="id_cargo">
-					<option *ngFor = "let cargo of cargos; let i = index " value="{{i}}">{{cargo}}</option>
-				</select>
-			</div>
-			<div class="col-4 mx-auto">
-				<label>Funcionario:</label>
-				<select class="custom-select" [(ngModel)]="id_funcionario">
-					<ng-template ngFor let-key [ngForOf]="objectKeys(funcionarios)"; let-i = index>
-					    <option *ngIf="funcionarios[key].cargo == cargos[id_cargo]" value={{i}}>{{funcionarios[key].nombre}}</option>
-					</ng-template> 
-				</select>
-			</div>
+		<div *ngIf="id_funcionario!==-1" class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-2 mx-auto">
+			<div class="card">
+		  		<div class="card-header">
+			    	{{funcionarios[objectKeys(funcionarios)[id_funcionario]].nombre}} {{funcionarios[objectKeys(funcionarios)[id_funcionario]].apellido}}
+			  	</div>
+			  	<div class="card-body">
+			    	<p class="card-text">
+			    		Actividad: {{funcionarios[objectKeys(funcionarios)[id_funcionario]].cargo}}<br>
+			    		Horas previas: {{funcionarios[objectKeys(funcionarios)[id_funcionario]].horasAcumuladas}}<br>
+			    		Horas actuales: {{funcionarios[objectKeys(funcionarios)[id_funcionario]].horas}}
+			    	</p>
+			    </div>
+	  		</div>
 		</div>
-		<div class="row my-2">
-			<div class="col">
-				<button class="btn btn-success" (click)="agregarTurno()">Agregar Turno</button>
-			</div>
+	</div>
+	<div align="center" class="row my-2">
+		<div class="col">
+			<button class="btn btn-success" (click)="agregarTurno()">Agregar Turno</button>
 		</div>
 	</div>
 	<h2>Horarios</h2>
 	<div class="row">
-		<div class="col-9 mx-auto">
+		<div class="col-10 mx-auto">
 			<table class="table table-bordered" id="tablaHorario">
 			  	<thead>
 			    	<tr>  
@@ -63,21 +81,7 @@
 			    	</tr>
 			  	</tbody>
 			</table>
-		</div>
-		<div *ngIf="id_funcionario!==-1" class="col-3 mx-auto">
-			<div class="card">
-		  		<div class="card-header">
-			    	{{funcionarios[objectKeys(funcionarios)[id_funcionario]].nombre}} {{funcionarios[objectKeys(funcionarios)[id_funcionario]].apellido}}
-			  	</div>
-			  	<div class="card-body">
-			    	<p class="card-text">
-			    		Actividad: {{funcionarios[objectKeys(funcionarios)[id_funcionario]].cargo}}<br>
-			    		Horas previas: {{funcionarios[objectKeys(funcionarios)[id_funcionario]].horasAcumuladas}}<br>
-			    		Horas actuales: {{funcionarios[objectKeys(funcionarios)[id_funcionario]].horas}}
-			    	</p>
-			    </div>
-	  		</div>
-		</div>
+		</div>	
 	</div>
 	<br>
 	<div align="center">

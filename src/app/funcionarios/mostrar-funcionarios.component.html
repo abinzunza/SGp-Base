@@ -97,7 +97,7 @@
 		  	<div class="form-row my-3">
 		    	<div class="col">
 		    		<label for="inputRut">Rut</label>
-		      		<input type="text" class="form-control form-control-sm" placeholder="Introduzca su rut" id="inputRut" formControlName="rut" [readOnly]="modo==='Modificar'" required> 
+		      		<input type="text" class="form-control form-control-sm" placeholder="Ej:19193382-6" id="inputRut" formControlName="rut" [readOnly]="modo==='Modificar'" required> 
 		      		<small *ngIf="form?.controls.rut.errors?.formatoIncorrecto && form.controls.rut.dirty">Error de formato</small>
 		      		<small *ngIf="form?.controls.rut.errors?.rutIncorrecto && form.controls.rut.dirty">Rut incorrecto</small>
 			    </div>
@@ -111,12 +111,12 @@
 		  	<div class="form-row my-3">
 		    	<div class="col">
 		    		<label for="inputTelefono">Telefono</label>
-		      		<input type="tel" class="form-control form-control-sm" placeholder="Introduzca su telefono" id="inputTelefono" formControlName="telefono"  required>
+		      		<input type="tel" class="form-control form-control-sm" placeholder="Ej: 56952206690" id="inputTelefono" formControlName="telefono"  required>
 		      		<small *ngIf="form?.controls.telefono.errors && form.controls.telefono.dirty">Error de formato</small>
 			    </div>
 			    <div class="col">
 			    	<label for="inputEmail">Email</label>
-		      		<input type="email" class="form-control form-control-sm" placeholder="Introduzca su email" id="inputEmail" formControlName="email" required>
+		      		<input type="email" class="form-control form-control-sm" placeholder="Ej: cristian.rojas@alumnos.uv.cl" id="inputEmail" formControlName="email" required>
 		      		<small *ngIf="form?.controls.email.errors && form.controls.email.dirty">Error de formato</small>
 		    	</div>
 		  	</div>
