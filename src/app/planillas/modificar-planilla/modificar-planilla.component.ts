@@ -123,7 +123,7 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 					idx:Number(this.planilla.dias[dia].turnos.indexOf(turnos[i]))
 				});
 			}
-			this.modalService.open(modal);
+			this.modalService.open(modal,{size:'lg'});
 		}
 	}
 
