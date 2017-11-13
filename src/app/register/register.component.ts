@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit {
 	modo:String;
 	form: FormGroup;
 
-
 	constructor(private userService:UserService,private fb:FormBuilder) { }
 
 	ngOnInit() {
@@ -29,7 +28,11 @@ export class RegisterComponent implements OnInit {
 			nombre:'',
 			apellido:'',
 			nombreUsuario:'',
-			contrasena:''
+			contrasena:['',Validators.compose([
+				Validators.required,
+				Validators.maxLength(5),
+				Validators.minLength(3)
+			])]
 		});
   	}
 

@@ -1,39 +1,65 @@
 <div class="col-4 mx-auto">
-    <h2>Registro de Administrador</h2>
-    <table class="table table-bordered table-striped">
-        <form [formGroup]="form" (submit)="guardarUsuario(form.value)">
-            <div class="form-row my-3">
+    <h2>Registro de Usuario</h2>
+   <!-- <table class="table table-bordered table-striped">-->
+        <form name="form" (submit)="guardarUsuario(form.value)">
                 <div class="col" >
-                    <label for="inputNombre">Nombre</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su nombre" id="inputNombre" formControlName="nombre" required>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su nombre" id="nombre" name="nombre" required>
+                    <!--
+                    <div *ngIf="nombre.errors">
+                        <div *ngIf="nombre.errors.sinEspacios" class="alert alert-danger">
+                            No se permite el ingreso de espacios en blanco.
+                        </div>
+                    </div>    
+                    -->             
                    <!-- <div *ngIf="f.submitted && !nombre.valid" class="help-block">First Name is required</div>-->
                 </div>
+
                 <div class="col">
-                    <label for="inputApellido">Apellido</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su apellido" id="inputApellido" formControlName="apellido" required>
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su apellido" id="apellido" name="inputApellido" fromControlName="apellido">
                    <!-- <div *ngIf="f.submitted && !apellido.valid" class="help-block">Last Name is required</div>-->
                 </div>
-            </div>
-            
-            <div class="form-row my-3">
+           
                 <div class="col">
-                    <label for="inputNombreUsuario">Nombre de usuario</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="inputNombreUsuario" formControlName="nombreuser" required>
+                    <label for="nombreUsuario">Nombre de usuario</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="nombreUsuario" name="nombreUsuario" fromControlName="nombreUsuario" ngModel #nombreUsuario="ngModel" sin-espacios required>
                     <!--<div *ngIf="f.submitted && !nombreUsuario.valid" class="help-block">Username is required</div>-->
                 </div>
+                <div *ngIf="nombreUsuario.touched && !nombreUsuario.valid" class="alert alert-danger">
+                    * El nombre de usuario es requerido
+                </div>
+
                 <div class="col">
-                    <label for="inputConstraseña">Contraseña</label>
-                    <input type="password" class="form-control form-control-sm" placeholder="Introduzca su contraseña" id="inputContraseña" formControlName="contraseña" required>
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" class="form-control form-control-sm" placeholder="Introduzca su contraseña" id="contrasena" name="contrasena" fromControlName="contrasena">
+                    <div *ngIf="form.controls.contrasena.errors && form.controls.contrasena.dirty">
+                        <div *ngIf="form.controls.contrasena.errors.required" class="alert alert-danger">
+                            El campo es requerido
+                        </div>
+                        <div *ngIf="form.controls.contrasena.errors.minlength" class="alert alert-danger">
+                            El campo requiere mínimo 3 caracteres
+                        </div>
+                        <div *ngIf="form.controls.contrasena.errors.minlength" class="alert alert-danger">
+                            El campo requiere máximo 5 caracteres
+                        </div>    
+                        {{form.controls.contrasena.errors | json}}     
+                    </div>     
                     <!--<div *ngIf="f.submitted && !contrasena.valid" class="help-block">Password is required</div>-->
                 </div>
-            </div>
+                <div *ngIf="contrasena.touched && !contrasena.valid" class="alert alert-danger">
+                    * La contraseña es requerida
+                </div>
+          
 
            
             <div class="form-row my-3">
+                <!--
                 <div class="col" align="right">
                     <button type="reset" class="btn btn-primary">Limpiar</button>
                 </div>
-                <div class="col">
+                -->
+                <div class="col" align="right">
                     <a routerLink="/login"><button type="submit" class="btn btn-primary">Guardar</button></a> 
                 </div>
                 <div class="col" algin="left">
@@ -41,5 +67,5 @@
                 </div>    
             </div>
         </form>
-    </table>    
+   <!-- </table>  -->  
 </div>

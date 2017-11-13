@@ -19,6 +19,7 @@ import { UserService } from './servicios/user.service';
 import { AuthenticationService } from './servicios/authentication.service';
 import { AlertService } from './servicios/alert.service';
 
+import { SinEspacios } from './validaciones.directive';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AlertService } from './servicios/alert.service';
     HomeComponent,
     MostrarFuncionariosComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SinEspacios
   ],
   imports: [
     BrowserModule,
