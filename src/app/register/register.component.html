@@ -27,28 +27,27 @@
                     <!--<div *ngIf="f.submitted && !nombreUsuario.valid" class="help-block">Username is required</div>-->
                 </div>
                 <div *ngIf="nombreUsuario.touched && !nombreUsuario.valid" class="alert alert-danger">
-                    * El nombre de usuario es requerido
+                    <small>El nombre de usuario es requerido</small>
                 </div>
 
                 <div class="col">
                     <label for="contrasena">Contraseña</label>
                     <input type="password" class="form-control form-control-sm" placeholder="Introduzca su contraseña" id="contrasena" name="contrasena" fromControlName="contrasena">
-                    <div *ngIf="form.controls.contrasena.errors && form.controls.contrasena.dirty">
+                    <div *ngIf="form?.controls.contrasena.errors && form.controls.contrasena.dirty">
                         <div *ngIf="form.controls.contrasena.errors.required" class="alert alert-danger">
-                            El campo es requerido
+                            <small>El campo es requerido</small>
                         </div>
                         <div *ngIf="form.controls.contrasena.errors.minlength" class="alert alert-danger">
-                            El campo requiere mínimo 3 caracteres
+                            <small>El campo requiere mínimo 3 caracteres</small>
                         </div>
                         <div *ngIf="form.controls.contrasena.errors.minlength" class="alert alert-danger">
-                            El campo requiere máximo 5 caracteres
-                        </div>    
-                        {{form.controls.contrasena.errors | json}}     
+                            <small>El campo requiere máximo 5 caracteres</small>
+                        </div>         
                     </div>     
                     <!--<div *ngIf="f.submitted && !contrasena.valid" class="help-block">Password is required</div>-->
                 </div>
                 <div *ngIf="contrasena.touched && !contrasena.valid" class="alert alert-danger">
-                    * La contraseña es requerida
+                    <small>La contraseña es requerida</small>
                 </div>
           
 

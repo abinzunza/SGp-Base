@@ -7,13 +7,13 @@
                 <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="inputUsuario" name="inputUsuario" ngModel #inputUsuario="ngModel" sin-espacios required #spy> 
                 <div *ngIf="inputUsuario.errors">
                     <div *ngIf="inputUsuario.errors.sinEspacios" class="alert alert-danger">
-                        No se permite el ingreso de espacios en blanco.
+                        <small>No se permite el ingreso de espacios en blanco.</small>
                     </div>
                 </div>
                <!-- <div *ngIf="ngForm.submitted && !nombreUsuario.valid" class="help-block">Username is required</div>-->
             </div>
             <div *ngIf="inputUsuario.touched && !inputUsuario.valid" class="alert alert-danger">
-                * El nombre de usuario es requerido
+                <small>El nombre de usuario es requerido</small>
             </div>
 
 
@@ -22,13 +22,13 @@
                 <input type="password" class="form-control form-control-sm" placeholder="Introduzca su contrasena" id="inputContrasena" name="inputContrasena" ngModel #inputContrasena="ngModel" sin-espacios required #spy>
                 <div *ngIf="inputContrasena.errors">
                     <div *ngIf="inputContrasena.errors.sinEspacios" class="alert alert-danger">
-                        No se permite el ingreso de espacios en blanco.
+                        <small>No se permite el ingreso de espacios en blanco.</small>
                     </div>
                 </div>
               <!--  <div *ngIf="ngForm.submitted && !contrasena.valid" class="help-block">Password is required</div>-->
             </div>
             <div *ngIf="inputContrasena.touched && !inputContrasena.valid" class="alert alert-danger">
-                * La contraseña es requerida
+                <small>La contraseña es requerida</small>
             </div>
 
             <div class="form-group">
