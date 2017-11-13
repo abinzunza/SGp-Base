@@ -8,10 +8,23 @@ body {font-family: Verdana,sans-serif;margin:0}
   position: relative;
   margin: auto;
 }
+
+#texto{
+  border: 10px solid lightgreen;
+  margin-bottom: 50px;
+}
+#mapa {
+  height: 300px;
+  width: 800px;
+  margin-bottom: 50px;
+  position: middle;
+  text-align: center;
+}
 agm-map {
   height: 300px;
-  width: 900px;
-  position: middle;
+  width: 500px;
+  margin-bottom: 50px;
+  position: absolute;
 }
 
 /* Next & previous buttons */
