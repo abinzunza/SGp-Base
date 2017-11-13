@@ -1,0 +1,49 @@
+<div class="col-4 mx-auto">
+    <h2>Ingreso a Administración de CRH</h2>
+  <!--  <table class="table table-bordered table-striped">-->
+        <form name="form"  (submit)="obtenerUsuario(form.value)">
+            <div class="form-group" >
+                <label for="inputUsuario">Usuario</label> 
+                <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="inputUsuario" name="inputUsuario" ngModel #inputUsuario="ngModel" sin-espacios required #spy> 
+                <div *ngIf="inputUsuario.errors">
+                    <div *ngIf="inputUsuario.errors.sinEspacios" class="alert alert-danger">
+                        <small>No se permite el ingreso de espacios en blanco.</small>
+                    </div>
+                </div>
+               <!-- <div *ngIf="ngForm.submitted && !nombreUsuario.valid" class="help-block">Username is required</div>-->
+            </div>
+            <div *ngIf="inputUsuario.touched && !inputUsuario.valid" class="alert alert-danger">
+                <small>El nombre de usuario es requerido</small>
+            </div>
+
+
+            <div class="form-group">
+                <label for="inputContrasena">Contraseña</label>
+                <input type="password" class="form-control form-control-sm" placeholder="Introduzca su contrasena" id="inputContrasena" name="inputContrasena" ngModel #inputContrasena="ngModel" sin-espacios required #spy>
+                <div *ngIf="inputContrasena.errors">
+                    <div *ngIf="inputContrasena.errors.sinEspacios" class="alert alert-danger">
+                        <small>No se permite el ingreso de espacios en blanco.</small>
+                    </div>
+                </div>
+              <!--  <div *ngIf="ngForm.submitted && !contrasena.valid" class="help-block">Password is required</div>-->
+            </div>
+            <div *ngIf="inputContrasena.touched && !inputContrasena.valid" class="alert alert-danger">
+                <small>La contraseña es requerida</small>
+            </div>
+
+            <div class="form-group">
+                <div align="center">
+                    <a routerLink="/home"><button type="submit" class="btn btn-primary" [disabled]="form?.controls.nombreUsuario && form?.controls.contrasena">Entrar</button></a>
+                    <a routerLink="/register"><button class="btn btn-primary">Registarse</button></a>
+                </div>
+            </div>
+        </form>
+ <!--   </table> -->   
+</div>
+
+UserName: {{spy.className}} <br>
+Password: {{spy.className}} <br>
+
+<!--[formGroup]="form" (submit)="obtenerUsuario(form.value)"
+formControlName="inputUsuario"
+-->

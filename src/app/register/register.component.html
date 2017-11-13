@@ -1,0 +1,70 @@
+<div class="col-4 mx-auto">
+    <h2>Registro de Usuario</h2>
+   <!-- <table class="table table-bordered table-striped">-->
+        <form name="form" (submit)="guardarUsuario(form.value)">
+                <div class="col" >
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su nombre" id="nombre" name="nombre" required>
+                    <!--
+                    <div *ngIf="nombre.errors">
+                        <div *ngIf="nombre.errors.sinEspacios" class="alert alert-danger">
+                            No se permite el ingreso de espacios en blanco.
+                        </div>
+                    </div>    
+                    -->             
+                   <!-- <div *ngIf="f.submitted && !nombre.valid" class="help-block">First Name is required</div>-->
+                </div>
+
+                <div class="col">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su apellido" id="apellido" name="inputApellido" fromControlName="apellido">
+                   <!-- <div *ngIf="f.submitted && !apellido.valid" class="help-block">Last Name is required</div>-->
+                </div>
+           
+                <div class="col">
+                    <label for="nombreUsuario">Nombre de usuario</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="nombreUsuario" name="nombreUsuario" fromControlName="nombreUsuario" ngModel #nombreUsuario="ngModel" sin-espacios required>
+                    <!--<div *ngIf="f.submitted && !nombreUsuario.valid" class="help-block">Username is required</div>-->
+                </div>
+                <div *ngIf="nombreUsuario.touched && !nombreUsuario.valid" class="alert alert-danger">
+                    <small>El nombre de usuario es requerido</small>
+                </div>
+
+                <div class="col">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" class="form-control form-control-sm" placeholder="Introduzca su contraseña" id="contrasena" name="contrasena" fromControlName="contrasena">
+                    <div *ngIf="form?.controls.contrasena.errors && form.controls.contrasena.dirty">
+                        <div *ngIf="form.controls.contrasena.errors.required" class="alert alert-danger">
+                            <small>El campo es requerido</small>
+                        </div>
+                        <div *ngIf="form.controls.contrasena.errors.minlength" class="alert alert-danger">
+                            <small>El campo requiere mínimo 3 caracteres</small>
+                        </div>
+                        <div *ngIf="form.controls.contrasena.errors.minlength" class="alert alert-danger">
+                            <small>El campo requiere máximo 5 caracteres</small>
+                        </div>         
+                    </div>     
+                    <!--<div *ngIf="f.submitted && !contrasena.valid" class="help-block">Password is required</div>-->
+                </div>
+                <div *ngIf="contrasena.touched && !contrasena.valid" class="alert alert-danger">
+                    <small>La contraseña es requerida</small>
+                </div>
+          
+
+           
+            <div class="form-row my-3">
+                <!--
+                <div class="col" align="right">
+                    <button type="reset" class="btn btn-primary">Limpiar</button>
+                </div>
+                -->
+                <div class="col" align="right">
+                    <a routerLink="/login"><button type="submit" class="btn btn-primary">Guardar</button></a> 
+                </div>
+                <div class="col" algin="left">
+                    <a routerLink="/login"><button class="btn btn-primary">Cancelar</button></a> 
+                </div>    
+            </div>
+        </form>
+   <!-- </table>  -->  
+</div>
