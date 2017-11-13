@@ -21,6 +21,7 @@ router.post("/crearUsuario",Usuario.crearUsuario);
 router.get("/obtenerUsuarios",Usuario.obtenerUsuarios);
 //router.get("/obtenerContrasena",Usuario.obtenerContrasena);
 
+
 router.post("/crearPlanilla",Planilla.crearPlanilla);
 router.get("/obtenerPlanilla",Planilla.obtenerPlanilla);
 router.get("/obtenerPlanillas",Planilla.obtenerPlanillas)

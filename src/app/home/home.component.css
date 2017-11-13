@@ -9,6 +9,12 @@ body {font-family: Verdana,sans-serif;margin:0}
   margin: auto;
 }
 
+agm-map {
+  height: 300px;
+  width: 900px;
+  position: middle;
+}
+
 /* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
