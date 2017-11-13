@@ -3,26 +3,31 @@
     <table class="table table-bordered table-striped">
         <form [formGroup]="form" (submit)="guardarUsuario(form.value)">
             <div class="form-row my-3">
-                <div class="col">
+                <div class="col" >
                     <label for="inputNombre">Nombre</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca su nombre" id="inputNombre" formControlName="nombre" required>
+                   <!-- <div *ngIf="f.submitted && !nombre.valid" class="help-block">First Name is required</div>-->
                 </div>
                 <div class="col">
                     <label for="inputApellido">Apellido</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca su apellido" id="inputApellido" formControlName="apellido" required>
+                   <!-- <div *ngIf="f.submitted && !apellido.valid" class="help-block">Last Name is required</div>-->
                 </div>
             </div>
             
             <div class="form-row my-3">
                 <div class="col">
                     <label for="inputNombreUsuario">Nombre de usuario</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="inputNombreUsuario" formControlName="nombre" required>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="inputNombreUsuario" formControlName="nombreuser" required>
+                    <!--<div *ngIf="f.submitted && !nombreUsuario.valid" class="help-block">Username is required</div>-->
                 </div>
                 <div class="col">
                     <label for="inputConstraseña">Contraseña</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca su contraseña" id="inputContraseña" formControlName="contraseña" required>
+                    <input type="password" class="form-control form-control-sm" placeholder="Introduzca su contraseña" id="inputContraseña" formControlName="contraseña" required>
+                    <!--<div *ngIf="f.submitted && !contrasena.valid" class="help-block">Password is required</div>-->
                 </div>
             </div>
+
            
             <div class="form-row my-3">
                 <div class="col" align="right">

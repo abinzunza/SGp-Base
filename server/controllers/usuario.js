@@ -23,7 +23,19 @@ exports.obtenerUsuarios = ((req,res)=>{
         }
     })
 });
-
+/*
+exports.obtenerContrasena = ((req,res)=>{
+    Usuario.find({contrasena:req.query.contrasena},
+    (err,docs)=>{
+        if(!err){
+            res.json(docs);
+        }else{
+            console.log(err);
+            res.status(404).send("Error");
+        }
+    })
+});
+*/
 /*
 exports.modificarUsuario = ((req,res)=>
     Usuario.replaceOne({

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { WebService } from '../servicios/web.service';
 import { UserService } from '../servicios/user.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -15,6 +16,7 @@ export class RegisterComponent implements OnInit {
 	listaItems;
 	modo:String;
 	form: FormGroup;
+
 
 	constructor(private userService:UserService,private fb:FormBuilder) { }
 
@@ -33,10 +35,10 @@ export class RegisterComponent implements OnInit {
 
   	guardarUsuario(usuario){
 		if(this.modo==='Crear'){
-			if(this.comprobarUsuario(usuario.username))
+			if(this.comprobarUsuario(usuario.nombreUsuario))
 				this.userService.guardarUsuario(usuario).subscribe(nuevoUsuario => this.listaItems.push(nuevoUsuario.json()),null,()=>{});
 			else
-				swal({title: 'Oops...',text: 'Éste username ya se encuentra registrado',type: 'error',allowOutsideClick: false,allowEscapeKey: false,allowEnterKey: false,showCloseButton: true});
+				swal({title: 'Oops...',text: 'Éste nombreUsuario ya se encuentra registrado',type: 'error',allowOutsideClick: false,allowEscapeKey: false,allowEnterKey: false,showCloseButton: true});
 		}/*
 		else {
 			usuario._id = this.usuario._id;
@@ -49,7 +51,7 @@ export class RegisterComponent implements OnInit {
 
 	comprobarUsuario(username){
 		for(let i=0;i<this.listaItems.length;i++)
-			if(this.listaItems[i].username == username)
+			if(this.listaItems[i].nombreUsuario == username)
 				return false;
 		return true;
 	}

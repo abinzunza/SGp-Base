@@ -10,12 +10,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MostrarFuncionariosComponent } from './funcionarios/mostrar-funcionarios.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.guard';
 import { PaginadorService } from './servicios/paginador.service';
 import { UserService } from './servicios/user.service';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { AuthenticationService } from './servicios/authentication.service';
+import { AlertService } from './servicios/alert.service';
+
 
 
 @NgModule({
@@ -34,7 +37,7 @@ import { RegisterComponent } from './register/register.component';
     NgbModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService],
+  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService,AuthenticationService,AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

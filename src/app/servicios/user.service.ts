@@ -20,4 +20,8 @@ export class UserService {
 		return this.http.get(this.url + 'obtenerUsuario?nombreusuario='+nombreUsuario).map(res=>res.json());
 	}
 
+	obtenerContrasena(contrasena:String){
+		return this.http.get(this.url + 'obtenerContrasena?contrasena='+contrasena).map(res=>res.json());
+	}
+
 }

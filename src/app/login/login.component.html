@@ -1,22 +1,26 @@
 <div class="col-4 mx-auto">
     <h2>Ingreso a Administración de CRH</h2>
     <table class="table table-bordered table-striped">
-        <form name="form" >
-            <div class="form-group">
-                <label for="username">Username</label> 
-                <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="inputUsuario" formControlName="usuario" required> 
+        <form name="form"  (submit)="obtenerUsuario(form.value)">
+            <div class="form-group" >
+                <label for="inputUsuario">Usuario</label> 
+                <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="inputUsuario" formControlName="inputUsuario" required > 
+                <div *ngIf="ngForm.submitted && !nombreUsuario.valid" class="help-block">Username is required</div>
             </div>
             <div class="form-group">
-                <label for="contrasena">Contraseña</label>
-                <input type="text" class="form-control form-control-sm" placeholder="Introduzca su contrasena" id="inputContrasena" formControlName="contrasena" required> 
+                <label for="inputContrasena">Contraseña</label>
+                <input type="password" class="form-control form-control-sm" placeholder="Introduzca su contrasena" id="inputContrasena" formControlName="contrasena">
+                <div *ngIf="ngForm.submitted && !contrasena.valid" class="help-block">Password is required</div>
             </div>
             <div class="form-group">
               
                 <div align="center">
-                    <a routerLink="/home"><button class="btn btn-primary">Entrar</button></a>
+                    <a routerLink="/home"><button type="submit" class="btn btn-primary" [disabled]="form?.controls.nombreUsuario && form?.controls.contrasena">Entrar</button></a>
                     <a routerLink="/register"><button class="btn btn-primary">Registarse</button></a>
                 </div>
             </div>
         </form>
     </table>    
 </div>
+
+<!--[formGroup]="form" (submit)="obtenerUsuario(form.value)"-->
