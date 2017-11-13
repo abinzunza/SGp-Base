@@ -3,43 +3,24 @@
 <html>
 
 <body>
-<header>
-	<a href="http://www.crh.uv.cl/index.php/infertilidad/problemas-de-infertilidad"><img id='banner1' src="assets/banner1.jpg" width="600" height="400" hspace="400"></a>
-	<!--
-	<div data-uk-slideshow="{animation: 'scale',autoplay: true ,autoplayInterval: 2500,pauseOnHover: false,kenburns: '15s'}">
-		<div class="uk-slidenav-position">
-	        <ul class="uk-slideshow">
-	            <li style="min-height: 300px;">
-	                <img src="assets/banner2017-06.jpg" alt="banner2017-06">
-	            </li>
-	            <li style="min-height: 300px;">
-	                <img src="assets/banner2017-05.jpg" alt="banner2017-05">
-	            </li>
-	            <li style="min-height: 300px;">
-	                <img src="assets/banner2017-01.jpg" alt="banner2017-01">                
-	            </li>
-	            <li style="min-height: 300px;">
-	                <img src="assets/banner2017-02.jpg" alt="banner2017-02">
-	            </li>
-	        </ul>
-	        <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous uk-hidden-touch" data-uk-slideshow-item="previous"></a>
-	        <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next uk-hidden-touch" data-uk-slideshow-item="next"></a>
-	    </div>
+	<header>
+		<a href="http://www.crh.uv.cl/index.php/infertilidad/problemas-de-infertilidad"><img id='banner1' src="assets/banner1.jpg" width="600" height="400" hspace="400"></a>
+		
+	</header>
+	<div style="text-align: center;" id="texto">
+		El Centro de Reproducción Humana de la Universidad de Valparaíso (CRH-UV) se formó en el año 2010 respondiendo a la necesidad de un centro integral de tratamientos para las parejas infértiles. Para ello, se realizó una importante inversión en infraestructura, equipamiento y capital humano capacitado. Fue este Centro en conjunto con el Hospital Carlos van Buren quien creó y desarrolló el Proyecto de terapias de Reproducción asistida de Baja Complejidad (TRA-BC) aprobado por FONASA. El éxito del programa permitió impulsó a replicar este programa el que hoy esta disponible en todas las regiones del país.
+
+		En conjunto con la implementación de este programa público, el CRH-UV puso a disposición para las pacientes de esta y otras regiones el acceso a bajo costo, pero con altos estándares de este tipo de terapias reproductivas. 
+
+		Habiendo cumplido con esta etapa inicial, el CRH-UV desarrolló un ambicioso proyecto destinado a implementar técnicas de reproducción asistida (TRA) de Alta Complejidad (FIV-ICSI) para las parejas de la región. El objetivo fue poner al alcance de más personas el acceso a tratamientos de alta complejidad. Para ello, la Universidad de Valparaíso, en conjunto con el Gobierno Regional han realizado una importante inversión que permite hoy disponer de  tratamientos de alta complejidad en la región de Valparaíso a partir del año 2015.
 	</div>
-	-->
-</header>
-<p>El Centro de Reproducción Humana de la Universidad de Valparaíso (CRH-UV) se formó en el año 2010 respondiendo a la necesidad de un centro integral de tratamientos para las parejas infértiles. Para ello, se realizó una importante inversión en infraestructura, equipamiento y capital humano capacitado. Fue este Centro en conjunto con el Hospital Carlos van Buren quien creó y desarrolló el Proyecto de terapias de Reproducción asistida de Baja Complejidad (TRA-BC) aprobado por FONASA. El éxito del programa permitió impulsó a replicar este programa el que hoy esta disponible en todas las regiones del país.
 
-En conjunto con la implementación de este programa público, el CRH-UV puso a disposición para las pacientes de esta y otras regiones el acceso a bajo costo, pero con altos estándares de este tipo de terapias reproductivas. 
-
-Habiendo cumplido con esta etapa inicial, el CRH-UV desarrolló un ambicioso proyecto destinado a implementar técnicas de reproducción asistida (TRA) de Alta Complejidad (FIV-ICSI) para las parejas de la región. El objetivo fue poner al alcance de más personas el acceso a tratamientos de alta complejidad. Para ello, la Universidad de Valparaíso, en conjunto con el Gobierno Regional han realizado una importante inversión que permite hoy disponer de  tratamientos de alta complejidad en la región de Valparaíso a partir del año 2015.</p>
-
-	<div>
+	<div id="mapa">
 		<agm-map [latitude]="lat" [longitude]="lng">
- 			<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+	 		<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 		</agm-map>
 	</div>
-	<div class="tm-footer tm-block">
+	<div class="tm-footer tm-block" style="background-color: #6DDA9B">
 		<div class="uk-container uk-container-center">
 			<footer class="uk-margin-large-top uk-text-center">
 				<div class="uk-panel">
@@ -48,9 +29,8 @@ Habiendo cumplido con esta etapa inicial, el CRH-UV desarrolló un ambicioso pro
 					  Universidad de Valparaíso<br />
 					  Hontaneda 2664<br />
 					  Valparaíso<br />
-					  <a href="tel:+56322507313"><i class="uk-icon-phone"></i> +56 32 250 7313</a><br />
-					  <a href="mailto:clinica.reproduccion@uv.cl"><i class="uk-icon-envelope"></i> clinica.reproduccion@uv.cl</a><br />
-					  <a href="https://www.facebook.com/reproduccionUV" target="_blank"><i class="uk-icon-facebook"></i> Síguenos en Facebook</a>
+					  <a href="tel:+56322507313"><i class="uk-icon-phone"></i> +56 32 250 7313</a><br />					  <a href="mailto:clinica.reproduccion@uv.cl"><i class="uk-icon-envelope"></i> clinica.reproduccion@uv.cl</a><br />
+						 <a href="https://www.facebook.com/reproduccionUV" target="_blank"><i class="uk-icon-facebook"></i> Síguenos en Facebook</a>
 					</h4>
 				</div>
 				<a class="tm-totop-scroller" data-uk-smooth-scroll href="#"></a>	
@@ -59,4 +39,4 @@ Habiendo cumplido con esta etapa inicial, el CRH-UV desarrolló un ambicioso pro
 	</div>
 </body>
 </html> 
-	
+
