@@ -14,6 +14,7 @@
 3. Instalar los módulos necesarios descritos en las dependencias dentro de 'package.json'.
 
 -'npm install'
+-'npm install @agm/core --save'
 
 
 	Iniciar (Deben estar dentro del directorio raiz)
