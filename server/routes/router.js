@@ -18,7 +18,7 @@ router.put("/modificarFuncionario",Funcionario.modificarFuncionario);
 router.delete("/eliminarFuncionario",Funcionario.eliminarFuncionario);
 
 router.post("/crearUsuario",Usuario.crearUsuario);
-router.get("/obtenerUsuarios",Usuario.obtenerUsuarios);
+router.get("/doLogin",Usuario.obtenerUsuario);
 //router.get("/obtenerContrasena",Usuario.obtenerContrasena);
 
 

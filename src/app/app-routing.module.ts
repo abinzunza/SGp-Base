@@ -21,7 +21,6 @@ const routes: Routes = [
     component: MostrarFuncionariosComponent
   },
   {
-
     path: 'login',
     component: LoginComponent
   },

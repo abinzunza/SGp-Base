@@ -16,10 +16,10 @@ import { RegisterComponent } from './register/register.component';
 import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.guard';
 import { PaginadorService } from './servicios/paginador.service';
 import { UserService } from './servicios/user.service';
-import { AuthenticationService } from './servicios/authentication.service';
-import { AlertService } from './servicios/alert.service';
 
-import { SinEspacios } from './validaciones.directive';
+import { AuthService } from './servicios/auth.service';
+import { AgmCoreModule } from '@agm/core';
+
 
 
 @NgModule({
@@ -28,8 +28,9 @@ import { SinEspacios } from './validaciones.directive';
     HomeComponent,
     MostrarFuncionariosComponent,
     LoginComponent,
-    RegisterComponent,
-    SinEspacios
+
+    RegisterComponent
+
   ],
   imports: [
     BrowserModule,
@@ -37,9 +38,14 @@ import { SinEspacios } from './validaciones.directive';
     ReactiveFormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService,AuthenticationService,AlertService],
+
+  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService,AuthService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
