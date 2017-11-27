@@ -18,7 +18,7 @@ import { PaginadorService } from './servicios/paginador.service';
 import { UserService } from './servicios/user.service';
 
 import { AuthService } from './servicios/auth.service';
-
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -38,7 +38,10 @@ import { AuthService } from './servicios/auth.service';
     ReactiveFormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService,AuthService],

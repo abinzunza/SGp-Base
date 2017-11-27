@@ -1,7 +1,7 @@
 var Usuario = require("../models/usuario");
 
 exports.crearUsuario = ((req,res)=>{
-    Usuario.create(req.query,
+    Usuario.create(req.body,
     (err,docs)=>{
         if(!err){
             res.status(200).send(docs)
@@ -12,8 +12,9 @@ exports.crearUsuario = ((req,res)=>{
     });
 });
 
-exports.obtenerUsuarios = ((req,res)=>{
-    Usuario.find({nombreUsuario:req.query.nombreUsuario},
+exports.obtenerUsuario = ((req,res)=>{
+    console.log(req);
+    Usuario.find({username:req.query.username,password:req.query.password},
     (err,docs)=>{
         if(!err){
             res.json(docs);
