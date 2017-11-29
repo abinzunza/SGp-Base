@@ -1,9 +1,11 @@
 
+
 <div>
     <h2>Sistema de Administración CRHV</h2>
-    <!--<table class="table table-bordered table-striped"> -->
+    <table class="table table-bordered table-striped"> 
         <form name="regform" (submit)="registrarUser($event)">
-            <!-- <div class="form-row my-3"> -->
+                <div class="form-row my-3"> 
+
                 <div class="col">
                     <label for="inputUsername">Nombre de Usuario</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca nombre de usuario" id="inputUsername" name="username"  ngModel #inputUsername="ngModel" sin-espacios required #spy>
@@ -22,7 +24,9 @@
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca apellido" id="inputApellido" name="apellido"  ngModel #inputApellido="ngModel" required #spy>
                 </div>
 
-            <!--</div>-->
+
+                </div>
+
             
                 <div class="col">
                     <label for="inputContrasena">Contraseña</label>
@@ -37,10 +41,8 @@
                 <div class="col">
                     <label for="inputRut">Rut</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca rut" id="inputRut" name="rut" ngModel #inputRut="ngModel" sin-espacios required #spy>
-
                     <small *ngIf="form?.controls.rut.errors?.formatoIncorrecto && form.controls.rut.dirty">Error de formato</small>
                     <small class="alert alert-danger" *ngIf="form?.controls.rut.errors?.rutIncorrecto && form.controls.rut.dirty">Rut incorrecto</small>
-
                     <div *ngIf="inputRut.errors">
                         <div *ngIf="inputRut.errors.sinEspacios" class="alert alert-danger">
                             <small>No se permite el ingreso de espacios en blanco.</small>
@@ -51,9 +53,7 @@
                 <div class="col">
                     <label for="inputTelefono">Teléfono</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca teléfono" id="inputTelefono" name="telefono" ngModel #inputTelefono="ngModel" sin-espacios required #spy>
-
                     <small *ngIf="form?.controls.telefono.errors && form.controls.telefono.dirty">Error de formato</small>
-
                     <div *ngIf="inputTelefono.errors">
                         <div *ngIf="inputTelefono.errors.sinEspacios" class="alert alert-danger">
                             <small>No se permite el ingreso de espacios en blanco.</small>
@@ -64,9 +64,7 @@
                 <div class="col">
                     <label for="inputEmail">E-mail</label>
                     <input type="email" class="form-control form-control-sm" placeholder="Introduzca email" id="inputEmail" name="email" ngModel #inputEmail="ngModel" sin-espacios required #spy>
-
                     <small *ngIf="form?.controls.email.errors && form.controls.email.dirty">Error de formato</small>
-
                     <div *ngIf="inputEmail.errors">
                         <div *ngIf="inputEmail.errors.sinEspacios" class="alert alert-danger">
                             <small>No se permite el ingreso de espacios en blanco.</small>
@@ -82,10 +80,12 @@
             </div>
 
         </form>
-    <!-- </table> -->
-</div>
 
+    </table> 
+</div>
+-->
 <div>
+    <h2>Sistema de Administración CRHV</h2>
     <table class="table table-bordered table-striped">
         <form name="logform" (submit)="loginUser($event)">
             <div class="col">
@@ -117,9 +117,8 @@
 
             <div class="col">
                 <div align="center">
-
-                    <input type="submit" value="Login" class="btn btn-primary"><!--<a routerLink="../home">-->
-
+                    <input type="submit" value="Login" class="btn btn-primary" routerLink="/home"><!--<a routerLink="../home">-->
+                    <input value="Registrarse" class="btn btn-primary" routerLink="/register">    
                 </div>    
             </div>
         </form>

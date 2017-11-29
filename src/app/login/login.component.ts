@@ -65,7 +65,6 @@ export class LoginComponent implements OnInit {
   	  rut:[e.target.elements[4].value,RutValidator.verificarRut],
   	  telefono:[e.target.elements[5].value,CelValidator.verificarFormatoCel],
   	  email:[e.target.elements[6].value,EmailValidator.verificarFormatoEmail]
-
 	  }
 
 	  this.webService.crearUsuario(regBody).subscribe(res => {
