@@ -59,18 +59,19 @@ export class LoginComponent implements OnInit {
 	  e.preventDefault();
 	  var regBody = {
 	  	username:e.target.elements[0].value,
-	  nombre:e.target.elements[1].value,
-	  apellido:e.target.elements[2].value,
-	  password:e.target.elements[3].value,
-	  rut:e.target.elements[4].value,
-	  telefono:e.target.elements[5].value,
-	  email:e.target.elements[6].value
+  	  nombre:e.target.elements[1].value,
+  	  apellido:e.target.elements[2].value,
+  	  password:e.target.elements[3].value,
+  	  rut:[e.target.elements[4].value,RutValidator.verificarRut],
+  	  telefono:[e.target.elements[5].value,CelValidator.verificarFormatoCel],
+  	  email:[e.target.elements[6].value,EmailValidator.verificarFormatoEmail]
+
 	  }
 
 	  this.webService.crearUsuario(regBody).subscribe(res => {
 	  	console.log('Usuario creado exitosamente');
 	  	//falta su mensajito de confirmacion
-	  	this.regform.reset();
+	  	//this.regform.reset();
 	  })
   }
 }

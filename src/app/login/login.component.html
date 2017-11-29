@@ -37,6 +37,10 @@
                 <div class="col">
                     <label for="inputRut">Rut</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca rut" id="inputRut" name="rut" ngModel #inputRut="ngModel" sin-espacios required #spy>
+
+                    <small *ngIf="form?.controls.rut.errors?.formatoIncorrecto && form.controls.rut.dirty">Error de formato</small>
+                    <small class="alert alert-danger" *ngIf="form?.controls.rut.errors?.rutIncorrecto && form.controls.rut.dirty">Rut incorrecto</small>
+
                     <div *ngIf="inputRut.errors">
                         <div *ngIf="inputRut.errors.sinEspacios" class="alert alert-danger">
                             <small>No se permite el ingreso de espacios en blanco.</small>
@@ -47,6 +51,9 @@
                 <div class="col">
                     <label for="inputTelefono">Teléfono</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca teléfono" id="inputTelefono" name="telefono" ngModel #inputTelefono="ngModel" sin-espacios required #spy>
+
+                    <small *ngIf="form?.controls.telefono.errors && form.controls.telefono.dirty">Error de formato</small>
+
                     <div *ngIf="inputTelefono.errors">
                         <div *ngIf="inputTelefono.errors.sinEspacios" class="alert alert-danger">
                             <small>No se permite el ingreso de espacios en blanco.</small>
@@ -57,6 +64,9 @@
                 <div class="col">
                     <label for="inputEmail">E-mail</label>
                     <input type="email" class="form-control form-control-sm" placeholder="Introduzca email" id="inputEmail" name="email" ngModel #inputEmail="ngModel" sin-espacios required #spy>
+
+                    <small *ngIf="form?.controls.email.errors && form.controls.email.dirty">Error de formato</small>
+
                     <div *ngIf="inputEmail.errors">
                         <div *ngIf="inputEmail.errors.sinEspacios" class="alert alert-danger">
                             <small>No se permite el ingreso de espacios en blanco.</small>
@@ -107,7 +117,9 @@
 
             <div class="col">
                 <div align="center">
-                    <input type="submit" value="Login" class="btn btn-primary">
+
+                    <input type="submit" value="Login" class="btn btn-primary"><!--<a routerLink="../home">-->
+
                 </div>    
             </div>
         </form>
