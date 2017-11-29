@@ -1,9 +1,10 @@
 
+<!--
 <div>
     <h2>Sistema de Administración CRHV</h2>
-    <!--<table class="table table-bordered table-striped"> -->
+    <table class="table table-bordered table-striped"> 
         <form name="regform" (submit)="registrarUser($event)">
-            <!-- <div class="form-row my-3"> -->
+                <div class="form-row my-3"> 
                 <div class="col">
                     <label for="inputUsername">Nombre de Usuario</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca nombre de usuario" id="inputUsername" name="username"  ngModel #inputUsername="ngModel" sin-espacios required #spy>
@@ -22,7 +23,7 @@
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca apellido" id="inputApellido" name="apellido"  ngModel #inputApellido="ngModel" required #spy>
                 </div>
 
-            <!--</div>-->
+                </div>
             
                 <div class="col">
                     <label for="inputContrasena">Contraseña</label>
@@ -76,10 +77,11 @@
             </div>
 
         </form>
-    <!-- </table> -->
+    </table> 
 </div>
-
+-->
 <div>
+    <h2>Sistema de Administración CRHV</h2>
     <table class="table table-bordered table-striped">
         <form name="logform" (submit)="loginUser($event)">
             <div class="col">
@@ -112,6 +114,7 @@
             <div class="col">
                 <div align="center">
                     <input type="submit" value="Login" class="btn btn-primary" routerLink="/home"><!--<a routerLink="../home">-->
+                    <input value="Registrarse" class="btn btn-primary" routerLink="/register">    
                 </div>    
             </div>
         </form>

@@ -1,62 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WebService } from '../servicios/web.service';
+
+import { PaginadorService } from '../servicios/paginador.service';
 import { UserService } from '../servicios/user.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from '../servicios/alert.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { RutValidator } from '../validaciones/rut';
+import { EmailValidator } from '../validaciones/email';
+import { CelValidator } from '../validaciones/cel';
 declare var swal:any;
 
+
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   templateUrl: './register.component.html',
-  styles: [],
-  providers: [UserService]
+  styleUrls: ['./register.component.css'],
+  providers: [WebService]
 })
 export class RegisterComponent implements OnInit {
 
 	listaItems;
+	paginador: any = {};
+	itemsPaginados: any[];
+	usuarios:any = null;
+	regform: FormGroup;
+	logform: FormGroup;
 	modo:String;
-	form: FormGroup;
+	modal:any;
 
-	constructor(private userService:UserService,private fb:FormBuilder) { }
+  constructor(private router:Router, private user:UserService, private webService:WebService,private paginadorService: PaginadorService,private modalService:NgbModal,private fb:FormBuilder) { }
 
-	ngOnInit() {
-	}
+  ngOnInit() {
+  }
+  
+  registrarUser(e) {
+	  e.preventDefault();
+	  var regBody = {
+	  	username:e.target.elements[0].value,
+  	  nombre:e.target.elements[1].value,
+  	  apellido:e.target.elements[2].value,
+  	  password:e.target.elements[3].value,
+  	  rut:[e.target.elements[4].value,RutValidator.verificarRut],
+  	  telefono:[e.target.elements[5].value,CelValidator.verificarFormatoCel],
+  	  email:[e.target.elements[6].value,EmailValidator.verificarFormatoEmail]
+	  }
 
-	crearUsuario(){
-  		this.modo = 'Crear';
-		this.form = this.fb.group({
-			nombre:'',
-			apellido:'',
-			nombreUsuario:'',
-			contrasena:['',Validators.compose([
-				Validators.required,
-				Validators.maxLength(5),
-				Validators.minLength(3)
-			])]
-		});
-  	}
-
-  	guardarUsuario(usuario){
-		if(this.modo==='Crear'){
-			if(this.comprobarUsuario(usuario.nombreUsuario))
-				this.userService.guardarUsuario(usuario).subscribe(nuevoUsuario => this.listaItems.push(nuevoUsuario.json()),null,()=>{});
-			else
-				swal({title: 'Oops...',text: 'Éste nombreUsuario ya se encuentra registrado',type: 'error',allowOutsideClick: false,allowEscapeKey: false,allowEnterKey: false,showCloseButton: true});
-		}/*
-		else {
-			usuario._id = this.usuario._id;
-			this.userService.modificarUsuario(usuario).subscribe(()=>this.listaItems[this.listaItems.indexOf(this.usuario)] = usuario,null,()=>{
-				this.modal.close();
-				this.setearPagina(this.paginador.paginaActual);
-			});
-		}*/
-	}
-
-	comprobarUsuario(username){
-		for(let i=0;i<this.listaItems.length;i++)
-			if(this.listaItems[i].nombreUsuario == username)
-				return false;
-		return true;
-	}
-
+	  this.webService.crearUsuario(regBody).subscribe(res => {
+	  	console.log('Usuario creado exitosamente');
+	  	//falta su mensajito de confirmacion
+	  	//this.regform.reset();
+	  })
+  }
 }
