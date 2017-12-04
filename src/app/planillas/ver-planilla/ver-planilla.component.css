@@ -1,9 +1,4 @@
-#tablaHorario {
-	font-family: sans-serif;
-	table-layout: fixed;
-	border-collapse: separate;
-	font-size: calc(1px + 0.8vw);
-}
+
 #tdTablaHorario:hover {
 	border-color: #17a2b8;
 }
