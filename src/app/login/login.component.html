@@ -1,73 +1,7 @@
 <div>
     <h2>Sistema de Administración CRHV</h2>
-    <!--<table class="table table-bordered table-striped"> -->
-        <form name="form" (submit)="registroUser($event)">
-            <!-- <div class="form-row my-3"> -->
-                <div class="col">
-                    <label for="inputUsername">Nombre de Usuario</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca nombre de usuario" id="inputUsername" name="username"  ngModel #inputUsername="ngModel" sin-espacios required #spy>
-                    <div *ngIf="inputUsername.errors">
-                        <div *ngIf="inputUsername.errors.sinEspacios" class="alert alert-danger">
-                            <small>No se permite el ingreso de espacios en blanco.</small>
-                        </div>
-                    </div>
-                </div>
-            <!--</div>-->
-            
-                <div class="col">
-                    <label for="inputContrasena">Contraseña</label>
-                    <input type="password" class="form-control form-control-sm" placeholder="Introduzca contrasena" id="inputContrasena" name="password" ngModel #inputContrasena="ngModel" sin-espacios required #spy>
-                    <div *ngIf="inputContrasena.errors">
-                        <div *ngIf="inputContrasena.errors.sinEspacios" class="alert alert-danger">
-                            <small>No se permite el ingreso de espacios en blanco.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <label for="inputRut">Rut</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca rut" id="inputRut" name="rut" ngModel #inputRut="ngModel" sin-espacios required #spy>
-                    <div *ngIf="inputRut.errors">
-                        <div *ngIf="inputRut.errors.sinEspacios" class="alert alert-danger">
-                            <small>No se permite el ingreso de espacios en blanco.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <label for="inputTelefono">Teléfono</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca teléfono" id="inputTelefono" name="telefono" ngModel #inputTelefono="ngModel" sin-espacios required #spy>
-                    <div *ngIf="inputTelefono.errors">
-                        <div *ngIf="inputTelefono.errors.sinEspacios" class="alert alert-danger">
-                            <small>No se permite el ingreso de espacios en blanco.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <label for="inputEmail">E-mail</label>
-                    <input type="email" class="form-control form-control-sm" placeholder="Introduzca email" id="inputEmail" name="email" ngModel #inputEmail="ngModel" sin-espacios required #spy>
-                    <div *ngIf="inputEmail.errors">
-                        <div *ngIf="inputEmail.errors.sinEspacios" class="alert alert-danger">
-                            <small>No se permite el ingreso de espacios en blanco.</small>
-                        </div>
-                    </div>
-
-                </div>
-
-            <div class="col">
-                <div align="center">
-                    <input type="submit" value="Registro" class="btn btn-primary">
-                </div>    
-            </div>
-
-        </form>
-    <!-- </table> -->
-</div>
-
-<div>
     <table class="table table-bordered table-striped">
-        <form name="form" (submit)="loginUser($event)">
+        <form name="logform" (submit)="loginUser($event)">
             <div class="col">
                 <label for="inputUsuario">Nombre de Usuario</label>
                 <input type="text" class="form-control form-control-sm" placeholder="Introduzca su usuario" id="inputUsuario" name="inputUsuario" ngModel #inputUsuario="ngModel" sin-espacios required #spy> 
@@ -84,6 +18,7 @@
             <div class="col">
                 <label for="inputContrasena">Contraseña</label>
                 <input type="password" class="form-control form-control-sm" placeholder="Introduzca su contraseña" id="inputContrasena" name="inputContrasena" ngModel #inputContrasena="ngModel" sin-espacios required #spy>
+
                 <div *ngIf="inputContrasena.errors">
                     <div *ngIf="inputContrasena.errors.sinEspacios" class="alert alert-danger">
                         <small>No se permite el ingreso de espacios en blanco.</small>
@@ -93,12 +28,14 @@
             <div *ngIf="inputContrasena.touched && !inputContrasena.valid" class="alert alert-danger">
                 <small>La contraseña es requerida</small>
              </div>
-
+             <i> ¿Aún sin cuenta?</i> <a routerLink="/register"> Registrate Aquí </a>
             <div class="col">
                 <div align="center">
-                    <input type="submit" value="Login" class="btn btn-primary">
+                    <input type="submit" value="Login" class="btn btn-primary" routerLink="/home"><!--<a routerLink="../home">-->
+                    <input value="Registrarse" class="btn btn-primary" routerLink="/register">    
                 </div>    
             </div>
         </form>
     </table>   
 </div>
+
