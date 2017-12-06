@@ -24,7 +24,6 @@ export class MostrarPlanillasComponent implements OnInit {
   	}
 
   	eliminarPlanilla(item){
-  		console.log(item);
   		if(new Date(item.fecha_inicio).getTime()>new Date().getTime())
 	  		swal({
 			    	text: '¿Estás seguro?',
