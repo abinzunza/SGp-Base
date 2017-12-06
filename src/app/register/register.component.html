@@ -12,15 +12,24 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col">
                     <label for="inputName">Nombre</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca nombre" id="inputName" name="name"  ngModel #inputName="ngModel" required #spy>
                 </div>
+
                 <div class="col">
                     <label for="inputApellido">Apellido</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Introduzca apellido" id="inputApellido" name="apellido"  ngModel #inputApellido="ngModel" required #spy>
                 </div>
 
+                <div class="col">
+                    <!--  CAMBIAR Lógica del back en el front  -->
+                    <label for="selectCargo">Tipo de Usuario</label>
+                    <select class="custom-select form-control form-control-sm" id="selectCargo" formControlName="cargo" required>
+                        <option *ngFor = "let cargo of ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología']">{{cargo}}</option>
+                    </select>
+                </div>
                 <!--</div>-->
             
                 <div class="col">
