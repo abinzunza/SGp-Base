@@ -4,7 +4,7 @@ export class RutValidator {
 	
 	static verificarRut(c:AbstractControl){
 		if(c.value==null)return null;
-		let regExpRut = /^[0-9]{2,8}\-{1}[0-9kK]{1}$/;
+		let regExpRut = /^[0-9]{1,8}\-{1}[0-9kK]{1}$/;
 		if(!regExpRut.test(c.value))return {formatoIncorrecto:true};
 		let sum = 0, numero = c.value;
 		for(let i=(numero.length-3),mul=0;i>=0;i--,mul++){
