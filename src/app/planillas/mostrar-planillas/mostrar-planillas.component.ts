@@ -23,26 +23,34 @@ export class MostrarPlanillasComponent implements OnInit {
   	}
 
   	eliminarPlanilla(item){
-  		swal({
-		    	text: '¿Estás seguro?',
-		    	type: 'warning',
-		    	allowOutsideClick: false,
-		    	allowEscapeKey: false,
-		    	allowEnterKey: false,
-		    	showCancelButton: true,
-		    	reverseButtons: true,
-		    	showCloseButton: true,
-		    	confirmButtonText: 'Aceptar',
-		    	cancelButtonText: 'Cancelar',
-			confirmButtonColor: 'green',
-			cancelButtonColor: 'red'
-		}).then((isOk: boolean) => {
-		    	if(isOk){
-					this.listaItems.splice(this.listaItems.indexOf(item),1);
-        			this.webService.eliminarPlanilla(new Date(item.fecha_inicio));
-        			this.setearPagina(this.paginador.paginaActual-((this.paginador.indiceFinal===this.paginador.indiceInicial)?1:0));
-		    	}
-		},(dismiss)=>console.log("Modal dismiss by",dismiss));
+  		console.log(item,new Date());
+  		if(new Date(item.fecha_inicio).getTime()>new Date().getTime())
+	  		swal({
+			    	text: '¿Estás seguro?',
+			    	type: 'warning',
+			    	allowOutsideClick: false,
+			    	allowEscapeKey: false,
+			    	allowEnterKey: false,
+			    	showCancelButton: true,
+			    	reverseButtons: true,
+			    	showCloseButton: true,
+			    	confirmButtonText: 'Aceptar',
+			    	cancelButtonText: 'Cancelar',
+				confirmButtonColor: 'green',
+				cancelButtonColor: 'red'
+			}).then((isOk: boolean) => {
+			    	if(isOk){
+						this.listaItems.splice(this.listaItems.indexOf(item),1);
+	        			this.webService.eliminarPlanilla(new Date(item.fecha_inicio));
+	        			this.setearPagina(this.paginador.paginaActual-((this.paginador.indiceFinal===this.paginador.indiceInicial)?1:0));
+			    	}
+			},(dismiss)=>console.log("Modal dismiss by",dismiss));
+		else
+			swal(
+			  	'Aviso!',
+			  	'Sólo se pueden eliminar las planillas futuras',
+			  	'info'
+			)
   	}
 
     setearPagina(pagina:number){
