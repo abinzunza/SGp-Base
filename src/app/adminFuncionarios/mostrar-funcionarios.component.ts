@@ -14,7 +14,7 @@ declare var swal:any;
 	styleUrls: ['./mostrar-funcionarios.component.css'],
 	providers: [WebService]
 })
-export class MostrarFuncionariosComponent implements OnInit {
+export class MostrarFuncionariosComponent2 implements OnInit {
 
   	listaItems;
 	paginador: any = {};
@@ -31,7 +31,7 @@ export class MostrarFuncionariosComponent implements OnInit {
   	    this.webService.obtenerFuncionarios()
   	    	.subscribe(resFuncionarios => this.listaItems = resFuncionarios,null,()=>this.setearPagina(1));
   	}
-
+  	/*
   	eliminarFuncionario(funcionario){
   		swal({
 		    	text: '¿Estás seguro?',
@@ -65,12 +65,13 @@ export class MostrarFuncionariosComponent implements OnInit {
         		}
 		},(dismiss)=>console.log("Modal dismiss by",dismiss));
   	}
+  	*/
 
   	detalleFuncionario(funcionario,modal){
 		this.funcionario = funcionario;
 		this.modalService.open(modal);
 	}
-
+	/*
 	crearFuncionario(modal){
 		this.modo = 'Crear';
 		this.form = this.fb.group({
@@ -83,7 +84,8 @@ export class MostrarFuncionariosComponent implements OnInit {
 		});
 		this.modal = this.modalService.open(modal);
 	}
-
+	*/
+	/*
 	modificarFuncionario(funcionario,modal){
 		this.funcionario = funcionario;
 		this.modo = 'Modificar';
@@ -99,7 +101,8 @@ export class MostrarFuncionariosComponent implements OnInit {
 		this.modal = this.modalService.open(modal);
 		
 	}
-
+	*/
+	/*
 	resetForm() {
 		this.form = this.fb.group({
 			nombre:'',
@@ -110,7 +113,8 @@ export class MostrarFuncionariosComponent implements OnInit {
 			email:['',EmailValidator.verificarFormatoEmail]
 		});
 	}
-
+	*/
+	/*
 	guardarFuncionario(funcionario){
 		if(this.modo==='Crear'){
 			if(this.comprobarRut(funcionario.rut))
@@ -129,14 +133,15 @@ export class MostrarFuncionariosComponent implements OnInit {
 			});
 		}
 	}
-
+	*/
+	/*
 	comprobarRut(rut){
 		for(let i=0;i<this.listaItems.length;i++)
 			if(this.listaItems[i].rut == rut)
 				return false;
 		return true;
 	}
-
+	*/
     setearPagina(pagina:number){
    		this.paginador = this.paginadorService.obtenerPaginador(this.listaItems.length, pagina);
    		this.itemsPaginados = this.listaItems.slice(this.paginador.indiceInicial, this.paginador.indiceFinal + 1);

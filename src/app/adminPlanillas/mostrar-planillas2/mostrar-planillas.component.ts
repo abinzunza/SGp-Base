@@ -10,7 +10,7 @@ declare var swal:any;
 	providers: [WebService]
 })
 
-export class MostrarPlanillasComponent implements OnInit {
+export class MostrarPlanillasComponent2 implements OnInit {
 
 	private listaItems: any[];
 	paginador: any = {};

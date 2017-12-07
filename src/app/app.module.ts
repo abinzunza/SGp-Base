@@ -9,9 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { HomeComponent2 } from './home2/home.component';
 import { MostrarFuncionariosComponent } from './funcionarios/mostrar-funcionarios.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { MostrarFuncionariosComponent2 } from './adminFuncionarios/mostrar-funcionarios.component';
 
 import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.guard';
 import { PaginadorService } from './servicios/paginador.service';
@@ -26,11 +28,11 @@ import { AgmCoreModule } from '@agm/core';
   declarations: [
     AppComponent,
     HomeComponent,
+    HomeComponent2,
     MostrarFuncionariosComponent,
     LoginComponent,
-
+    MostrarFuncionariosComponent2,
     RegisterComponent
-
   ],
   imports: [
     BrowserModule,

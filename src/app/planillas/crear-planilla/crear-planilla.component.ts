@@ -74,7 +74,7 @@ export class CrearPlanillaComponent implements OnInit, IPlanillaCanDeactivate {
 				if(this.funcionarios[this.objectKeys(this.funcionarios)[this.id_funcionario]].horas<44){
 					this.unsavedChanges = true;
 					this.funcionarios[this.objectKeys(this.funcionarios)[this.id_funcionario]].horas += this.id_turno_fin - this.id_turno_inicio;
-					var turnObj = {funcionario:this.objectKeys(this.funcionarios)[this.id_funcionario],inicio:Number(this.id_turno_inicio),duracion:this.id_turno_fin - this.id_turno_inicio};
+					var turnObj = {funcionario:this.objectKeys(this.funcionarios)[this.id_funcionario],inicio:Number(this.id_turno_inicio),duracion:this.id_turno_fin - this.id_turno_inicio,presente:true,justificado:false};
 					this.planilla.dias[this.id_dia].turnos.push(turnObj);
 					this.resetIds();
 				}else
