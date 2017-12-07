@@ -77,10 +77,11 @@ export class MostrarFuncionariosComponent implements OnInit {
 			nombre:'',
 			apellido:'',
 			rut:['',RutValidator.verificarRut],
-			cargo:'',
+			cargo:'Administrativo',
 			telefono:['',CelValidator.verificarFormatoCel],
 			email:['',EmailValidator.verificarFormatoEmail]
 		});
+		this.form.controls['cargo'].setValue('Administrativo');
 		this.modal = this.modalService.open(modal);
 	}
 

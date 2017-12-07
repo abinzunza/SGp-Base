@@ -103,7 +103,10 @@
 			    </div>
 			    <div class="col">
 			    	<label for="selectCargo">Cargo</label>
-		      		<select class="custom-select form-control form-control-sm" id="selectCargo" [value]="funcionario.cargo" formControlName="cargo" required>
+		      		<select *ngIf="modo==='Crear'" class="custom-select form-control form-control-sm" id="selectCargo" formControlName="cargo" required>
+						<option *ngFor = "let cargo of ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología']">{{cargo}}</option>
+					</select>
+		      		<select *ngIf="modo==='Modificar'" class="custom-select form-control form-control-sm" id="selectCargo" [value]="funcionario.cargo" formControlName="cargo" required>
 						<option *ngFor = "let cargo of ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología']">{{cargo}}</option>
 					</select>
 				</div>
