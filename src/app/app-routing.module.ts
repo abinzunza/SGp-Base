@@ -7,6 +7,7 @@ import { MostrarFuncionariosComponent } from './funcionarios/mostrar-funcionario
 import { MostrarFuncionariosComponent2 } from './adminFuncionarios/mostrar-funcionarios.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthguardGuard } from './authguard.guard';
 
 const routes: Routes = [
   {

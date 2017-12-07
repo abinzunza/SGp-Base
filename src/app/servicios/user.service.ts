@@ -6,10 +6,22 @@ export class UserService {
 
 	private url:string;
 	private headers:Headers;
+	private isUserLoggedIn;
+	public username;
 
 	constructor(private http:Http) {
 		this.url = 'http://localhost:2100/';
 		this.headers = new Headers();
+		this.isUserLoggedIn = false;
+	}
+
+	setUserLoggedIn(){
+		this.isUserLoggedIn = true;
+		this.username = 'admin';
+	}
+
+	getUserLoggedIn() {
+		return this.isUserLoggedIn;
 	}
 
 	guardarUsuario(usuario){

@@ -1,0 +1,27 @@
+
+version: '3'
+services:
+  db:
+    image: mongo:latest
+    expose:
+      - "27017"
+    volumes:
+      - "/usr/docker/crh_planilla/data/db:/data/db"
+
+  frond:
+    image: jorgeortiz/crh_frond
+    ports:
+      - "4220:4200"
+    links:
+      - "back:BACK"
+    depends_on:
+      - db
+
+  back:
+    image: jorgeortiz/crh_back
+    ports:
+      - "2120:2100"
+    links:
+      - "db:DB"
+    depends_on:
+      - db

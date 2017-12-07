@@ -22,6 +22,9 @@ import { UserService } from './servicios/user.service';
 import { AuthService } from './servicios/auth.service';
 import { AgmCoreModule } from '@agm/core';
 
+import { Router } from '@angular/router';
+import { AuthguardGuard } from './authguard.guard';
+
 
 
 @NgModule({
@@ -46,7 +49,9 @@ import { AgmCoreModule } from '@agm/core';
     })
   ],
 
-  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService,AuthService],
+
+  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService,AuthService, AuthguardGuard],
+
 
   bootstrap: [AppComponent]
 })
