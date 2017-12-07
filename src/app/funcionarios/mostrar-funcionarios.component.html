@@ -103,7 +103,7 @@
 			    </div>
 			    <div class="col">
 			    	<label for="selectCargo">Cargo</label>
-		      		<select class="custom-select form-control form-control-sm" id="selectCargo" formControlName="cargo" required>
+		      		<select class="custom-select form-control form-control-sm" id="selectCargo" [value]="funcionario.cargo" formControlName="cargo" required>
 						<option *ngFor = "let cargo of ['Administrativo','Tens','Matron(a)','Lab Biología','Lab Andrología']">{{cargo}}</option>
 					</select>
 				</div>
@@ -122,7 +122,7 @@
 		  	</div>
 		  	<div class="form-row my-3">
 		  		<div class="col" align="right">
-		  			<button type="reset" class="btn btn-primary">Limpiar</button>
+		  			<button type="button" (click)="resetForm()" class="btn btn-primary">Limpiar</button>
 		  		</div>
 		  		<div class="col">
 		  			<button type="submit" class="btn btn-primary" [disabled]="form?.controls.rut.errors || form?.controls.email.errors || form?.controls.telefono.errors">Guardar</button>	

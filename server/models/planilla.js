@@ -3,7 +3,9 @@ var mongoose = require('mongoose');
 var turnoSchema = mongoose.Schema({
 	funcionario:{type: mongoose.Schema.Types.ObjectId},
 	inicio:Number,
-	duracion:Number
+	duracion:Number,
+	presente:Boolean,
+	justificado:Boolean
 },{ versionKey: false });
 
 var diaSchema = mongoose.Schema({

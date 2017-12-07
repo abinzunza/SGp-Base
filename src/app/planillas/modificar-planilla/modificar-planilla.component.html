@@ -115,15 +115,19 @@
 			    		</button>
 			    	</td>
 			    	<td>
-		    			<input type="radio" name="'justificado' + {{i}}">Justificado
+			    		<input type="radio" [ngModel]="key.just" [value]="0" name="'justificado' + {{i}}">Presente
 		    			<br>
-		    			<input type="radio" name="'justificado' + {{i}}">No Justificado
+		    			<input type="radio" [ngModel]="key.just" [value]="1" name="'justificado' + {{i}}">Justificado
+		    			<br>
+		    			<input type="radio" [ngModel]="key.just" [value]="2" name="'justificado' + {{i}}">No Justificado
 			    	</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	<button class="btn btn-sm btn-success col-sm-3" (click)="modificarAsistencia(turnosModal)" style="margin-left:70%;margin-bottom: 15px">Modificar asistencias</button>
 	<div class="modal-footer">
+		
 		<label>{{turnoSeleccionado+8}}:00 - {{turnoSeleccionado+9}}:00</label>
 	</div>
 </ng-template>

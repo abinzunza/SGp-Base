@@ -23,6 +23,7 @@ export class MostrarFuncionariosComponent implements OnInit {
 	form: FormGroup;
 	modo:String;
 	modal:any;
+	cargoC: string;
 	
 	constructor(private webService:WebService,private paginadorService: PaginadorService,private modalService:NgbModal,private fb:FormBuilder) { }
 
@@ -94,7 +95,20 @@ export class MostrarFuncionariosComponent implements OnInit {
 			telefono:[this.funcionario.telefono,CelValidator.verificarFormatoCel],
 			email:[this.funcionario.email,EmailValidator.verificarFormatoEmail]
 		});
+		this.form.controls['cargo'].setValue(this.funcionario.cargo);
 		this.modal = this.modalService.open(modal);
+		
+	}
+
+	resetForm() {
+		this.form = this.fb.group({
+			nombre:'',
+			apellido:'',
+			rut:[this.funcionario.rut,RutValidator.verificarRut],
+			cargo:this.funcionario.cargo,
+			telefono:['',CelValidator.verificarFormatoCel],
+			email:['',EmailValidator.verificarFormatoEmail]
+		});
 	}
 
 	guardarFuncionario(funcionario){

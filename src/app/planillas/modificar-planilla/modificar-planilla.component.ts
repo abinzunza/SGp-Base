@@ -28,6 +28,7 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 	diasSemana = [];
 	planilla = null;
 	turnosModal:any[] = [];
+	just:number;
 
 	constructor(private webService:WebService, private route: ActivatedRoute, private router:Router, private modalService:NgbModal){}
 
@@ -111,19 +112,48 @@ export class ModificarPlanillaComponent implements OnInit, IPlanillaCanDeactivat
 	detalleTurno(dia,turno,modal){
 		this.turnosModal.length = 0; //Limpia arr modal
 		var turnos = this.planilla.dias[dia].turnos.filter(function(t){return (t.inicio === turno || (Number(t.inicio+t.duracion) > turno) && t.inicio < turno)});
+		var just = 0;
 		if(turnos.length!==0){
 			this.diaSeleccionado = dia;
 			this.turnoSeleccionado = turno;
 			for(let i = 0;i<turnos.length;++i) {
+				if(this.funcionarios[turnos[i].funcionario].presente) {
+					just = 0;
+				} else {
+					if(this.funcionarios[turnos[i].funcionario].justificado) {
+						just = 1;
+					} else
+						just = 2;	
+				}
 				this.turnosModal.push({
 					nombre:this.funcionarios[turnos[i].funcionario].nombre,
 					cargo:this.funcionarios[turnos[i].funcionario].cargo,
 					inicio:(turnos[i].inicio+8)+":00",
 					fin:(turnos[i].inicio+turnos[i].duracion+8)+":00",
-					idx:Number(this.planilla.dias[dia].turnos.indexOf(turnos[i]))
+					idx:Number(this.planilla.dias[dia].turnos.indexOf(turnos[i])),
+					dia:dia,
+					just:just
 				});
 			}
 			this.modalService.open(modal,{size:'lg'});
+		}
+	}
+
+
+	modificarAsistencia(turnos) {
+		turnos = this.planilla.dias[turnos[0].dia];
+		for(let k of turnos) {
+			if(k.just == 0) {
+				this.planilla.dias[turnos[0].dia].turnos[k.idx].presente = true
+			} else {
+				this.planilla.dias[turnos[0].dia].turnos[k.idx].presente = false
+				if(k.just == 1) {
+					this.planilla.dias[turnos[0].dia].turnos[k.idx].justificado = true
+				} else {
+					this.planilla.dias[turnos[0].dia].turnos[k.idx].justificado = false
+					
+				}
+			}
 		}
 	}
 
