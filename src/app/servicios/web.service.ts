@@ -14,7 +14,15 @@ export class WebService {
 	}
   
 	guardarPlanilla(planilla){
-	  	return this.http.post(this.url + 'crearPlanilla',planilla,this.headers);
+	  	return this.http.post(this.url + 'crearPlanilla',planilla);
+	}
+
+	crearUsuario(user) {
+		return this.http.post(this.url + 'crearUsuario',user);
+	}
+
+	loginUsuario(query){
+		return this.http.get(this.url + 'doLogin?username=' + query.username +'&password=' + query.password).map(res => res.json());
 	}
 
 	obtenerPlanilla(fecha:Date){
@@ -34,7 +42,7 @@ export class WebService {
 	}
 
 	modificarPlanilla(planilla){
-		return this.http.put(this.url + 'modificarPlanilla',planilla,this.headers);
+		return this.http.put(this.url + 'modificarPlanilla',planilla);
 	}
 
 	eliminarPlanilla(fecha:Date){

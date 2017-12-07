@@ -16,9 +16,12 @@ import { RegisterComponent } from './register/register.component';
 import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.guard';
 import { PaginadorService } from './servicios/paginador.service';
 import { UserService } from './servicios/user.service';
-import { AuthService } from './servicios/auth.service';
 
+import { AuthService } from './servicios/auth.service';
 import { AgmCoreModule } from '@agm/core';
+
+import { Router } from '@angular/router';
+import { AuthguardGuard } from './authguard.guard';
 
 
 @NgModule({
@@ -40,7 +43,9 @@ import { AgmCoreModule } from '@agm/core';
       apiKey: ''
     })
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService,AuthService],
+
+  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService,AuthService, AuthguardGuard],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
