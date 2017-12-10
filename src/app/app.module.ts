@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { LOCALE_ID } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -23,6 +24,36 @@ import { AgmCoreModule } from '@agm/core';
 import { Router } from '@angular/router';
 import { AuthguardGuard } from './authguard.guard';
 
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    canActivate: [AuthguardGuard],
+    component: HomeComponent
+  },
+  {
+    path: 'funcionarios',
+    canActivate: [AuthguardGuard],
+    component: MostrarFuncionariosComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'planillas',
+    canActivate: [AuthguardGuard],
+    loadChildren: './planillas/planillas.module#PlanillasModule'
+  }
+];
 
 @NgModule({
   declarations: [
