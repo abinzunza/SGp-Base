@@ -8,9 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-	lat: number = -33.052086;
- 	lng: number = -71.608562;
-
   constructor() { }
 
   ngOnInit() {
