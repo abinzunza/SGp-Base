@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-
+ 
   loginUser(e) {
   	e.preventDefault();
   	var query = {
@@ -43,12 +43,20 @@ export class LoginComponent implements OnInit {
   	}
   	
   	this.webService.loginUsuario(query).subscribe(res=>{
-  		if(res.length == 0){
-  			console.log('Usuario o contrasena incorrecta')
+  		if(query.username == e.target.elements[0].value){
+        if(query.password == e.target.elements[1].value){
+          console.log('conectado? = '+this.user.getUserLoggedIn());
+          this.user.setUserLoggedIn();
+          console.log('login correcto');
+          console.log('conectado? = '+this.user.getUserLoggedIn());
+        }else{
+            console.log('contraseña incorrecta');
+          }
   		}
-  		else {
-  			//logear usuario, no se como hacen el handling de esto
-  			console.log('login correcto')
+  		else{
+        if(res.length == 0){
+          console.log('Usuario o contrasena incorrecta');
+        }
   		}
 
   	})
@@ -56,21 +64,22 @@ export class LoginComponent implements OnInit {
   }
   
   registrarUser(e) {
-	  e.preventDefault();
-	  var regBody = {
-	  	username:e.target.elements[0].value,
-  	  nombre:e.target.elements[1].value,
-  	  apellido:e.target.elements[2].value,
-  	  password:e.target.elements[3].value,
-  	  rut:[e.target.elements[4].value,RutValidator.verificarRut],
-  	  telefono:[e.target.elements[5].value,CelValidator.verificarFormatoCel],
-  	  email:[e.target.elements[6].value,EmailValidator.verificarFormatoEmail]
-	  }
+    e.preventDefault();
+    var regBody = {
+      username:e.target.elements[0].value,
+      nombre:e.target.elements[1].value,
+      apellido:e.target.elements[2].value,
+      tipouser:e.target.elements[3].value,
+      password:e.target.elements[4].value,
+      rut:[e.target.elements[5].value,RutValidator.verificarRut],
+      telefono:[e.target.elements[6].value,CelValidator.verificarFormatoCel],
+      email:[e.target.elements[7].value,EmailValidator.verificarFormatoEmail]
+    }
 
-	  this.webService.crearUsuario(regBody).subscribe(res => {
-	  	console.log('Usuario creado exitosamente');
-	  	//falta su mensajito de confirmacion
-	  	//this.regform.reset();
-	  })
+    this.webService.crearUsuario(regBody).subscribe(res => {
+      console.log('Usuario creado exitosamente');
+      //falta su mensajito de confirmacion
+      //this.regform.reset();
+    })
   }
 }
