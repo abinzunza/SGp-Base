@@ -4,7 +4,7 @@ var usuarioSchema = mongoose.Schema({
 	username:String,
 	nombre:String,
 	apellido:String,
-	tipouser:Number,
+	tipouser:String,
 	password:String,
 	rut:String,
 	telefono:String,
