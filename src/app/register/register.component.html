@@ -1,0 +1,87 @@
+<div>
+    <h2>Sistema de Administración CRHV</h2>
+        <table align="center" class="table table-bordered table-striped">
+        <form name="regform" (submit)="registrarUser($event)">
+            <!-- <div class="form-row my-3"> -->
+                <div class="col">
+                    <label for="inputUsername">Nombre de Usuario</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca nombre de usuario" id="inputUsername" name="username"  ngModel #inputUsername="ngModel" sin-espacios required #spy>
+                    <div *ngIf="inputUsername.errors">
+                        <div *ngIf="inputUsername.errors.sinEspacios" class="alert alert-danger">
+                            <small>No se permite el ingreso de espacios en blanco.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label for="inputName">Nombre</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca nombre" id="inputName" name="username"  ngModel #inputName="ngModel" required #spy>
+                </div>
+
+                <div class="col">
+                    <label for="inputApellido">Apellido</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca apellido" id="inputApellido" name="apellido"  ngModel #inputApellido="ngModel" required #spy>
+                </div>
+
+                <div class="col">
+                    <label for="selectTipoUser">Tipo de Usuario</label>
+                    <select class="custom-select form-control form-control-sm" id="selectTipoUser" formControlName="user" required>
+                        <option *ngFor = "let tipouser of ['Administrativo','Funcionario']">{{tipouser}}</option>
+                    </select>
+                </div>
+                <!--</div>-->
+            
+                <div class="col">
+                    <label for="inputContrasena">Contraseña</label>
+                    <input type="password" class="form-control form-control-sm" placeholder="Introduzca contrasena" id="inputContrasena" name="password" ngModel #inputContrasena="ngModel" sin-espacios required #spy>
+                    <div *ngIf="inputContrasena.errors">
+                        <div *ngIf="inputContrasena.errors.sinEspacios" class="alert alert-danger">
+                            <small>No se permite el ingreso de espacios en blanco.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label for="inputRut">Rut</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca rut, ej:12345678-9" id="inputRut" name="rut" ngModel #inputRut="ngModel" sin-espacios required #spy>
+                    <small *ngIf="form?.controls.rut.errors?.formatoIncorrecto && form.controls.rut.dirty">Error de formato</small>
+                    <small class="alert alert-danger" *ngIf="form?.controls.rut.errors?.rutIncorrecto && form.controls.rut.dirty">Rut incorrecto</small>
+                    <div *ngIf="inputRut.errors">
+                        <div *ngIf="inputRut.errors.sinEspacios" class="alert alert-danger">
+                            <small>No se permite el ingreso de espacios en blanco.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label for="inputTelefono">Teléfono</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca teléfono, ej: 56912345678" id="inputTelefono" name="telefono" ngModel #inputTelefono="ngModel" sin-espacios required #spy>
+                    <small *ngIf="form?.controls.telefono.errors && form.controls.telefono.dirty">Error de formato</small>
+                    <div *ngIf="inputTelefono.errors">
+                        <div *ngIf="inputTelefono.errors.sinEspacios" class="alert alert-danger">
+                            <small>No se permite el ingreso de espacios en blanco.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label for="inputEmail">E-mail</label>
+                    <input type="email" class="form-control form-control-sm" placeholder="Introduzca email, ej:usuario@gmail.com" id="inputEmail" name="email" ngModel #inputEmail="ngModel" sin-espacios required #spy>
+                    <small *ngIf="form?.controls.email.errors && form.controls.email.dirty">Error de formato</small>
+                    <div *ngIf="inputEmail.errors">
+                        <div *ngIf="inputEmail.errors.sinEspacios" class="alert alert-danger">
+                            <small>No se permite el ingreso de espacios en blanco.</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            <div class="col">
+                <div align="center">
+                    <input type="submit" value="Registro" class="btn btn-primary">
+                </div>    
+            </div>
+
+        </form>
+        </table> 
+</div>
