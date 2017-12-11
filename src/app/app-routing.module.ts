@@ -17,6 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    canActivate: [AuthguardGuard],
     component: HomeComponent
   },
    {
@@ -25,6 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'funcionarios',
+    canActivate: [AuthguardGuard],
     component: MostrarFuncionariosComponent
   },
   {
@@ -37,6 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'planillas',
+    canActivate: [AuthguardGuard],
     loadChildren: './planillas/planillas.module#PlanillasModule'
   },
   {
@@ -50,6 +53,6 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule{ } 
