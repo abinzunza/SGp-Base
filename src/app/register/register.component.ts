@@ -53,5 +53,6 @@ export class RegisterComponent implements OnInit {
 	  	//falta su mensajito de confirmacion
 	  	//this.regform.reset();
 	  })
+
   }
 }

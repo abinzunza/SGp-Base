@@ -15,7 +15,9 @@
 
                 <div class="col">
                     <label for="inputName">Nombre</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca nombre" id="inputName" name="name"  ngModel #inputName="ngModel" required #spy>
+
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca nombre" id="inputName" name="username"  ngModel #inputName="ngModel" required #spy>
+
                 </div>
 
                 <div class="col">
@@ -24,9 +26,10 @@
                 </div>
 
                 <div class="col">
-                    <!--  CAMBIAR Lógica del back en el front  -->
+
                     <label for="selectTipoUser">Tipo de Usuario</label>
-                    <select class="custom-select form-control form-control-sm" id="selectTipoUser" formControlName="tipouser" required>
+                    <select class="custom-select form-control form-control-sm" id="selectTipoUser" formControlName="user" required>
+
                         <option *ngFor = "let tipouser of ['Administrativo','Funcionario']">{{tipouser}}</option>
                     </select>
                 </div>
@@ -44,7 +47,9 @@
 
                 <div class="col">
                     <label for="inputRut">Rut</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca rut" id="inputRut" name="rut" ngModel #inputRut="ngModel" sin-espacios required #spy>
+
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca rut, ej:12345678-9" id="inputRut" name="rut" ngModel #inputRut="ngModel" sin-espacios required #spy>
+
                     <small *ngIf="form?.controls.rut.errors?.formatoIncorrecto && form.controls.rut.dirty">Error de formato</small>
                     <small class="alert alert-danger" *ngIf="form?.controls.rut.errors?.rutIncorrecto && form.controls.rut.dirty">Rut incorrecto</small>
                     <div *ngIf="inputRut.errors">
@@ -56,7 +61,8 @@
 
                 <div class="col">
                     <label for="inputTelefono">Teléfono</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca teléfono" id="inputTelefono" name="telefono" ngModel #inputTelefono="ngModel" sin-espacios required #spy>
+
+                    <input type="text" class="form-control form-control-sm" placeholder="Introduzca teléfono, ej: 56912345678" id="inputTelefono" name="telefono" ngModel #inputTelefono="ngModel" sin-espacios required #spy>
                     <small *ngIf="form?.controls.telefono.errors && form.controls.telefono.dirty">Error de formato</small>
                     <div *ngIf="inputTelefono.errors">
                         <div *ngIf="inputTelefono.errors.sinEspacios" class="alert alert-danger">
@@ -67,7 +73,8 @@
 
                 <div class="col">
                     <label for="inputEmail">E-mail</label>
-                    <input type="email" class="form-control form-control-sm" placeholder="Introduzca email" id="inputEmail" name="email" ngModel #inputEmail="ngModel" sin-espacios required #spy>
+
+                    <input type="email" class="form-control form-control-sm" placeholder="Introduzca email, ej:usuario@gmail.com" id="inputEmail" name="email" ngModel #inputEmail="ngModel" sin-espacios required #spy>
                     <small *ngIf="form?.controls.email.errors && form.controls.email.dirty">Error de formato</small>
                     <div *ngIf="inputEmail.errors">
                         <div *ngIf="inputEmail.errors.sinEspacios" class="alert alert-danger">
@@ -79,7 +86,7 @@
 
             <div class="col">
                 <div align="center">
-                    <input type="submit" value="Registro" class="btn btn-primary" routerLink="/login">
+                    <input type="submit" value="Registro" class="btn btn-primary">
                 </div>    
             </div>
 
