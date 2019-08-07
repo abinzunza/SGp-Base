@@ -1,0 +1,52 @@
+<div class="container" id="miTabla">
+	<h2>Funcionarios</h2>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Cargo</th>
+				<th>Opciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of itemsPaginados; let i = index ">
+				<td>{{i+1+5*(paginador.paginaActual-1)}}</td>
+				<td>{{item.nombre}}</td>
+				<td>{{item.cargo}}</td>
+				<td>
+					<div class="row" align="center">
+						<div class="col mx-auto">
+							<i class="fa fa-search fa-lg" (click)="detalleFuncionario(item,detalle)"></i>
+						</div>
+						<div class="col mx-auto">
+							<i class="fa fa-pencil fa-lg" (click)="modificarFuncionario(item,crear_modificar)"></i>
+						</div>
+						<div class="col mx-auto">
+							<i class="fa fa-trash-o fa-lg" (click)="eliminarFuncionario(item)"></i>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<ng-template #detalle let-c="close">
+	<div class="modal-header">
+		<h5 class="modal-title">{{funcionario.nombre}} {{funcionario.apellido}}</h5>
+		<button class="close" (click)="c()">
+        	<span>×</span>
+        </button>
+	</div>
+	<div class="modal-body">
+		<ul>
+	    	<li>Nombre: {{funcionario.nombre}}</li>
+	    	<li>Apellido: {{funcionario.apellido}}</li>
+	    	<li>Rut: {{funcionario.rut}}</li>
+	    	<li>Cargo: {{funcionario.cargo}}</li>
+	    	<li>Telefono: {{funcionario.telefono}}</li>
+	    	<li>Email: {{funcionario.email}}</li>
+	    </ul>
+	</div>
+</ng-template>

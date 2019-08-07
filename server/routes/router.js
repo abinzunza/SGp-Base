@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-var Planilla = require('../controllers/semana');
-var Empleado = require('../controllers/empleado');
+var Planilla = require('../controllers/planilla');
+var Funcionario = require('../controllers/funcionario');
+var Usuario = require('../controllers/usuario');
 
 router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -11,7 +12,15 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get("/obtenerEmpleados",Empleado.obtenerEmpleados);
+router.post("/crearFuncionario",Funcionario.crearFuncionario);
+router.get("/obtenerFuncionarios",Funcionario.obtenerFuncionarios);
+router.put("/modificarFuncionario",Funcionario.modificarFuncionario);
+router.delete("/eliminarFuncionario",Funcionario.eliminarFuncionario);
+
+router.post("/crearUsuario",Usuario.crearUsuario);
+router.get("/doLogin",Usuario.obtenerUsuario);
+//router.get("/obtenerContrasena",Usuario.obtenerContrasena);
+
 
 router.post("/crearPlanilla",Planilla.crearPlanilla);
 router.get("/obtenerPlanilla",Planilla.obtenerPlanilla);

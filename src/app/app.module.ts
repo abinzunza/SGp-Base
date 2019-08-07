@@ -1,40 +1,89 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { LOCALE_ID } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { MostrarPlanillasComponent } from './mostrar-planillas/mostrar-planillas.component';
-import { CrearPlanillaComponent } from './crear-planilla/crear-planilla.component';
-import { VerPlanillaComponent } from './ver-planilla/ver-planilla.component';
-import { ModificarPlanillaComponent } from './modificar-planilla/modificar-planilla.component';
-import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.guard';
+import { HomeComponent } from './home/home.component';
+import { HomeComponent2 } from './home2/home.component';
+import { MostrarFuncionariosComponent } from './funcionarios/mostrar-funcionarios.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { MostrarFuncionariosComponent2 } from './adminFuncionarios/mostrar-funcionarios.component';
 
-const appRoutes: Routes = [
-	{ path: '', redirectTo: '/mostrarPlanillas', pathMatch: 'full' },
-	{ path: 'mostrarPlanillas', component: MostrarPlanillasComponent },
-  { path: 'crearPlanilla', component: CrearPlanillaComponent, canDeactivate:[CrearPlanillaDeactivateGuard] },
-  { path: 'verPlanilla/:id', component: VerPlanillaComponent },
-  { path: 'modificarPlanilla/:id', component: ModificarPlanillaComponent, canDeactivate:[CrearPlanillaDeactivateGuard] }
+import { CrearPlanillaDeactivateGuard } from './guard/crear-planilla-deactivate.guard';
+import { PaginadorService } from './servicios/paginador.service';
+import { UserService } from './servicios/user.service';
+
+import { AuthService } from './servicios/auth.service';
+import { AgmCoreModule } from '@agm/core';
+
+import { Router } from '@angular/router';
+import { AuthguardGuard } from './authguard.guard';
+
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    canActivate: [AuthguardGuard],
+    component: HomeComponent
+  },
+  {
+    path: 'funcionarios',
+    canActivate: [AuthguardGuard],
+    component: MostrarFuncionariosComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'planillas',
+    canActivate: [AuthguardGuard],
+    loadChildren: './planillas/planillas.module#PlanillasModule'
+  }
 ];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    MostrarPlanillasComponent,
-    CrearPlanillaComponent,
-    VerPlanillaComponent,
-    ModificarPlanillaComponent
+    HomeComponent,
+    HomeComponent2,
+    MostrarFuncionariosComponent,
+    LoginComponent,
+    MostrarFuncionariosComponent2,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes),
+    NgbModule.forRoot(),
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard],
+
+
+  providers: [{ provide: LOCALE_ID, useValue: "es-ES" },CrearPlanillaDeactivateGuard,PaginadorService,UserService,AuthService, AuthguardGuard],
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

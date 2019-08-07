@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand  navbar-light bg-light">
+	<div align="center">
+		<a class="navbar-brand">
+			<img src="favicon.ico" width="30" height="30">
+			<br *ngIf="width<450">Universidad <br *ngIf="width<450">de Valparaiso
+		</a>
+	</div>
+	<div class="collapse navbar-collapse">
+	    <ul class="navbar-nav">
+	    	<div class="row">
+	    		<div class="col-sm-12 col-md col-lg col-xl">
+	    			<li class="nav-item">
+	    				<a class="nav-item nav-link" routerLink="/login">Login</a>
+	    			</li>
+	    		</div>
+		      	<div class="col-sm-12 col-md col-lg col-xl">
+			      	<li class="nav-item">
+			    		<a class="nav-item nav-link" routerLink="/home">Inicio</a>
+			      	</li>
+			    </div>
+			    <div class="col-sm-12 col-md col-lg col-xl">
+			    	<li class="nav-item">
+			        	<a class="nav-item nav-link" routerLink="/planillas">Planillas</a>
+			      	</li>
+			    </div>
+			    <div class="col-sm-12 col-md col-lg col-xl">
+			      	<li class="nav-item">
+			        	<a class="nav-item nav-link" routerLink="/funcionarios">Funcionarios</a>
+			      	</li>
+			    </div>
+	    	</div>
+	    </ul>
+	</div>
+</nav>
+<div>	
+  	<router-outlet></router-outlet>	
+</div>

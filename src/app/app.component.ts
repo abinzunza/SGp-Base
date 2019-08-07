@@ -1,8 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet>',
+  templateUrl: './app.component.html',
+  styles: ['li{border-left:1px solid #ccc;padding-right:5px}']
 })
 
-export class AppComponent { }
+export class AppComponent {
+	
+	width;
+
+	ngOnInit(){
+		this.width = window.innerWidth;
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize(event) {
+	  	this.width = window.innerWidth;
+	}
+}
